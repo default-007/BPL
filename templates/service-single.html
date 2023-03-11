@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<body class="page-template page-template-default single single-service-item">
+	{% include 'partials/loader.html'%}
+
+	{% include 'partials/mobile_nav.html'%}
+	<!-- Mobile Nav End -->
+
+	<div class="pr__wrapper" id="site-wrapper">
+		<div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+			data-uk-parallax="bgy: -200" id="site-hero">
+			{% include 'partials/header.html' %}
+
+			<section class="pr__hero uk-section" id="pr__hero">
+				<div class="uk-container">
+					<div class="section-inner">
+						<div class="hero-content">
+							<hr class="line pr__hr__secondary">
+							<h2 class="page-title  uk-heading-primary">{{object.name}}</h2>
+							<ul class="breadcrumbs uk-breadcrumb">
+								<li><a href="{% url 'website:service' %}">Services</a></li>
+								<li><span>{{object.name}}</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section><!-- Site Hero End -->
+
+		</div><!-- Hero Wrap End -->
+
+		<div class="pr__content" id="site-content">
+
+			<div class="pr__primary uk-section uk-section-large has-sidebar" id="site-primary">
+				<div class="outer">
+					<div class="uk-container uk-position-relative">
+						<div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
+							<div class="uk-width-expand">
+								<main class="pr__main" id="site-main">
+									<article class="uk-article page type-page">
+
+										<div class="outer">
+											<div class="inner">
+												<div class="entry-body">
+													<div class="image pr__image__cover pr__ratio__square" data-src="{{service.imageURL}}"
+														data-uk-img="">
+													</div>
+													<br>
+													<hr class="pr__vr__section">
+													<br>
+													<section>{{object.formatted_markdown|safe }}</section>
+
+												</div>
+											</div>
+										</div>
+
+									</article>
+								</main>
+							</div>
+							<div class="uk-width-1-4@l">
+								<aside class="pr-sidebar widget-area" id="site-sidebar">
+									<div style="z-index: 1;" data-uk-sticky="offset: 120; bottom: true">
+										<section class="widget widget_nav_menu">
+											<h2 class="widget-title">Core Services</h2>
+											<ul class="content">
+												{% for object in service_list %}
+												<li><a href="{{object.get_absolute_url}}">{{object.name}}</a></li>
+												{% endfor %}
+											</ul>
+										</section>
+									</div>
+								</aside>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div><!-- Site Content End -->
+		{% include 'partials/footer.html'%}
+		<!-- Site Footer End-->
+
+	</div><!-- Site Wrapper End -->
+
+
+</body>
+{% endblock %}

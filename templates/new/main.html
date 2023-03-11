@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bakpage Labs</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="msapplication-TileColor" content="#E9204F" />
+		<meta name="theme-color" content="#E9204F" />
+		<!-- 
+		{% load compress %} {% compress css %}
+		<link
+			type="text/x-scss"
+			href="{% static 'new/styles.scss' %}"
+			rel="stylesheet"
+			media="screen" />
+		{% endcompress %} -->
+		<!--  SGVsbG8hIE15IG5hbWUgaXMgU2FyYSBNYXphbC4gV2VsY29tZSB0byBteSBDb2RlUGVuIQ== -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500&family=Raleway:wght@100;200;300;400;500&family=Roboto:wght@300;400;700&display=swap"
+			rel="stylesheet" />
+		<!-- SGVsbG8hIE15IG5hbWUgaXMgU2FyYSBNYXphbC4gV2VsY29tZSB0byBteSBDb2RlUGVuOiBodHRwczovL2NvZGVwZW4uaW8vU2FyYW1hemFsICYgR2l0SHViOiBodHRwczovL2dpdGh1Yi5jb20vc2FyYW1hemFs -->
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+			integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+			crossorigin="anonymous" />
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+		<link href="{% static 'new/main.css'%}" rel="stylesheet" />
+	</head>
+
+	<body>
+		{% include 'partials/messages.html' %}
+		<!-- Content Row -->
+		{% block content %} {% endblock %}
+
+		<section class="nav">
+			<h1 class="span loader">
+				<span class="m">B</span><span class="m">A</span><span class="m">K</span
+				><span class="m">P</span><span class="m">A</span><span class="m">G</span
+				><span class="m">E</span> <span class="m">&nbsp;</span
+				><span class="m">L</span><span class="m">A</span><span class="m">B</span
+				><span class="m">S</span><span class="m">&nbsp;</span>
+			</h1>
+			<div class="console-container">
+				<span id="text"></span>
+				<div class="console-underscore" id="console">&#95;</div>
+			</div>
+			<!-- <div class="rw-wrapper">
+				<h2 class="rw-sentence">
+					<div class="rw-words rw-words-1">
+						<span>Build</span>
+						<span>Create</span>
+					</div>
+
+					<span>your</span>
+					<div class="rw-words rw-words-2">
+						<span>Brand</span>
+						<span>Identity</span>
+					</div>
+				</h2>
+			</div> -->
+		</section>
+
+		<canvas class="background"></canvas
+		><!-- SGVsbG8hIE15IG5hbWUgaXMgU2FyYSBNYXphbC4gV2VsY29tZSB0byBteSBDb2RlUGVuIQ== -->
+		<!-- JavaScript Bundle with Popper -->
+		<script src="{% static 'new/styles.js'%}"></script>
+	</body>
+</html>

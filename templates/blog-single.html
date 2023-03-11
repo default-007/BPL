@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static humanize%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<body class="page-template page-template-full single single-post">
+    {% include 'partials/loader.html'%}
+
+    {% include 'partials/mobile_nav.html'%}
+    <!-- Mobile Nav End -->
+
+    <div class="pr__wrapper" id="site-wrapper">
+        <div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+            data-uk-parallax="bgy: -200" id="site-hero">
+            {% include 'partials/header.html' %}
+
+            <section class="pr__hero uk-section" id="pr__hero">
+                <div class="uk-container">
+                    <div class="section-inner">
+                        <div class="hero-content">
+                            <a class="category" href="blog/">Blog</a>
+                            <h2 class="page-title uk-h1">{{object.title}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- Site Hero End -->
+
+        </div><!-- Hero Wrap End -->
+
+        <div class="pr__content" id="site-content">
+
+            <div class="pr__primary uk-section uk-section-medium" id="site-primary">
+                <div class="outer">
+                    <div class="uk-container uk-position-relative">
+                        <div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
+                            <div class="uk-width-expand">
+                                <main class="pr__main" id="site-main">
+                                    <article class="uk-article post type-post single-post">
+
+                                        <div class="outer uk-grid uk-grid-large uk-flex" data-uk-grid="">
+                                            <div class="inner uk-width-expand">
+                                                <div class="entry-body">
+                                                    <p class="uk-text-lead">Bring to the table win-win survival
+                                                        strategies to ensure proactive domination. At the end of the
+                                                        day, going forward,
+                                                        a new normal that has evolved from generation X is on the runway
+                                                        heading towards a streamlined cloud solution. User
+                                                        generated content in real-time will have multiple touchpoints
+                                                        for offshoring.
+                                                    </p>
+
+                                                    <h3 class="uk-h3">{{object.title}}</h3>
+
+                                                    <figure class="wp-caption aligncenter" data-uk-lightbox="">
+                                                        <a href="{{object.image.url}}">
+                                                            <img src="{{object.image.url}}"
+                                                                alt="Improving User Experience and Website Performance with Progressive JPEGs"></a>
+                                                        <figcaption class="wp-caption-text">Success is largely a matter
+                                                            of holding on after others have let go.</figcaption>
+                                                    </figure>
+                                                    <p>{{object.text}}</p>
+                                                    <br>
+                                                    <blockquote class="uk-text-left">
+                                                        <p>{{object.quote}}</p>
+                                                        <footer><strong>{{object.author}}</strong> – CEO, Strategy
+                                                            Director
+                                                        </footer>
+                                                    </blockquote>
+
+                                                </div>
+                                            </div>
+                                            <div class="pr__entry__sidebar uk-width-1-5@l uk-flex-first@l">
+                                                <div class="pr__entry__meta pr__vr">
+                                                    <ul class="content uk-list uk-list-divider">
+                                                        <li class="author">
+                                                            <strong>Written by:</strong>
+                                                            <span>{{object.author}}</span>
+                                                        </li>
+                                                        <li class="date">
+                                                            <strong>Posted on:</strong>
+                                                            <span>{{object.created_at|naturaltime}}</span>
+                                                        </li>
+                                                        <li class="category">
+                                                            <strong>Tags:</strong>
+                                                            {% for tag in object.tags.all %}
+                                                            <span><a href="#">{{ tag.name }}</a></span>
+                                                            {% endfor %}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="pr__entry__share pr__small">
+                                                    <a href="#" data-uk-tooltip="Share on Twitter"><i
+                                                            class="icon pr-logo-twitter"></i></a>
+                                                    <a href="#" data-uk-tooltip="Share on Facebook"><i
+                                                            class="icon pr-logo-facebook"></i></a>
+                                                    <a href="#" data-uk-tooltip="Share on Xing"><i
+                                                            class="icon pr-logo-xing"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </article>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="pr__blog pr__section section-slider uk-section uk-section-large uk-section-default"
+                id="pr__blog">
+                <div class="section-outer">
+                    <div class="section-heading">
+                        <div class="uk-container">
+                            <div class="inner">
+                                <div>
+                                    <hr class="line pr__hr__secondary">
+                                    <h2 class="title uk-h3 pr__heading__secondary">Related Posts.</h2>
+                                </div>
+                            </div>
+                        </div><!-- Container End -->
+                    </div><!-- Heading End -->
+                    <div class="section-inner">
+                        <div class="uk-container">
+                            <div class="blog-listing style-two blog-slider uk-grid uk-grid-collapse uk-child-width-1-3@m"
+                                data-uk-grid="">
+                                {% for object in blog_list%}
+                                <div class="item">
+                                    <article class="post type-post active">
+                                        <div class="outer">
+                                            <div class="featured-image">
+                                                <div class="image pr__image__cover" data-src="{{object.image.url}}"
+                                                    data-uk-img=""></div>
+                                            </div>
+                                            <div class="inner">
+                                                <div class="top">
+                                                    <a class="category" href="#">Careers</a>
+                                                    <h3 class="title uk-h4"><a href="#">{{object.title}}</a></h3>
+                                                    <p class="description">{{object.text|truncatechars:180}}</p>
+                                                    <a href="#" class="link"></a>
+                                                </div>
+                                                <div class="bottom">
+                                                    <ul class="meta">
+                                                        <li class="meta-date">{{object.created_at|naturaltime}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                {%endfor%}
+
+                            </div>
+                        </div><!-- Container End -->
+                    </div><!-- Inner End -->
+                </div><!-- Outer End -->
+            </section><!-- Section: Blog End -->
+
+        </div><!-- Site Content End -->
+        {% include 'partials/footer.html'%}
+        <!-- Site Footer End-->
+
+    </div><!-- Site Wrapper End -->
+
+
+</body>
+{% endblock %}

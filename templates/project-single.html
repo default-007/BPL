@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<body class="page-template page-template-full single single-service-item"></body>
+
+{% include 'partials/loader.html'%}
+
+{% include 'partials/mobile_nav.html'%}
+<!-- Mobile Nav End -->
+
+<div class="pr__wrapper" id="site-wrapper">
+	<div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+		data-uk-parallax="bgy: -200" id="site-hero">
+		{% include 'partials/header.html' %}
+
+		<section class="pr__hero uk-section" id="pr__hero">
+			<div class="uk-container">
+				<div class="section-inner">
+					<div class="hero-content">
+						<hr class="line pr__hr__secondary">
+						<h2 class="page-title uk-heading-primary">{{object.name}}.</h2>
+						<ul class="breadcrumbs uk-breadcrumb">
+							<li><a href="{% url 'website:project' %}">Projects</a></li>
+							<li><span>{{object.name}}</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section><!-- Site Hero End -->
+
+	</div><!-- Hero Wrap End -->
+
+	<div class="pr__content" id="site-content">
+
+		<div class="pr__primary uk-section uk-section-medium" id="site-primary">
+			<div class="outer">
+				<div class="uk-container uk-position-relative">
+					<div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
+						<div class="uk-width-expand">
+							<main class="pr__main" id="site-main">
+								<article class="uk-article post type-project">
+
+									<div class="outer uk-grid uk-grid-large" data-uk-grid="">
+										<div class="inner uk-width-expand">
+											<div class="entry-body">
+												<h3 class="uk-h3">{{object.name}}</h3>
+												<p>{{object.description}}
+												</p>
+
+												<div class="pr__gallery uk-grid" data-uk-grid="" data-uk-lightbox="animation: scale">
+													<div class="pr__gallery__item uk-width-1-1@m">
+														<div class="featured-image">
+															<div class="image pr__image__cover" data-src="{{object.image.url}}" data-uk-img="">
+															</div>
+															<a href="{{object.image.url}}" class="link"></a>
+														</div>
+													</div>
+												</div>
+
+												<div class="pr__gallery uk-grid uk-child-width-1-2@m" data-uk-grid="masonry: true;"
+													data-uk-lightbox="animation: scale">
+													<div class="pr__gallery__item">
+														<div class="featured-image">
+															<div class="image pr__image__cover" data-src="{{object.image1URL}}" data-uk-img="">
+															</div>
+															<a href="{{object.image1URL}}" class="link"></a>
+														</div>
+													</div>
+													<div class="pr__gallery__item">
+														<div class="featured-image">
+															<div class="image pr__image__cover pr__ratio__portrait" data-src="{{object.image2URL}}"
+																data-uk-img="">
+															</div>
+															<a href="{{object.image2URL}}" class="link"></a>
+														</div>
+													</div>
+													<div class="pr__gallery__item">
+														<div class="featured-image">
+															<div class="image pr__image__cover" data-src="{{object.image3URL}}" data-uk-img="">
+															</div>
+															<a href="{{object.image3URL}}" class="link"></a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="pr__entry__sidebar uk-width-1-5@l">
+											<div class="pr__entry__meta pr__vr">
+												<h2 class="title">Project Details</h2>
+												<ul class="content uk-list uk-list-divider">
+													<li class="author">
+														<strong>Client</strong>
+														<span>{{object.client}}</span>
+													</li>
+													<li class="date">
+														<strong>Tags</strong>
+														{% for tag in object.tags.all %}
+														<span>{{ tag.name }}</span>
+														{% endfor %}
+													</li>
+													<li class="category">
+														<strong>Category</strong>
+														<span><a href="#">{{object.category}}</a></span>
+													</li>
+												</ul>
+											</div>
+											<div class="pr__entry__share pr__small">
+												<a href="#" data-uk-tooltip="Share on Twitter"><i class="icon pr-logo-twitter"></i></a>
+												<a href="#" data-uk-tooltip="Share on Facebook"><i class="icon pr-logo-facebook"></i></a>
+												<a href="#" data-uk-tooltip="Share on Xing"><i class="icon pr-logo-xing"></i></a>
+											</div>
+											<div class="pr__entry__footer">
+												<a href="{{object.link}}" class="button uk-button uk-button-default uk-width-1-1">Visit
+													site</a>
+											</div>
+										</div>
+									</div>
+
+								</article>
+							</main>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="pr__works pr__section section-slider uk-section uk-section-medium uk-section-default"
+			id="pr__works">
+			<div class="section-outer">
+				<div class="section-heading">
+					<div class="uk-container">
+						<div class="inner">
+							<div>
+								<hr class="line pr__hr__secondary">
+								<h2 class="title uk-h3 pr__heading__secondary">Related Projects.</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section-inner">
+					<div class="uk-container">
+						<div class="items-listing works-boxes works-slider owl-carousel" data-items="3" data-margin="30"
+							data-loop="true" data-center="true" data-autoplay="true" data-dots="true">
+							{% for object in project_list %}
+							<div class="item work-box">
+								<div class="outer">
+									<div class="image pr__image__cover pr__ratio__square" data-src="{{object.image.url}}" data-uk-img="">
+									</div>
+									<div class="inner">
+										<h3 class="title uk-h4">{{object.name}}</h3>
+										<p class="category">{{object.category}}</p>
+										<a href="#" class="link uk-position-cover"></a>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- Section: Works End -->
+
+	</div><!-- Site Content End -->
+	{% include 'partials/footer.html'%}
+	<!-- Site Footer End-->
+
+</div><!-- Site Wrapper End -->
+
+
+</body>
+{% endblock %}

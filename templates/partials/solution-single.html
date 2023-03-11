@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<body class="page-template page-template-full single single-service-item"></body>
+
+{% include 'partials/loader.html'%}
+
+{% include 'partials/mobile_nav.html'%}
+<!-- Mobile Nav End -->
+
+<div class="pr__wrapper" id="site-wrapper">
+    <div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+        data-uk-parallax="bgy: -200" id="site-hero">
+        {% include 'partials/header.html' %}
+
+        <section class="pr__hero uk-section" id="pr__hero">
+            <div class="uk-container">
+                <div class="section-inner">
+                    <div class="hero-content">
+                        <hr class="line pr__hr__secondary">
+                        <h2 class="page-title uk-heading-primary">Interior Design.</h2>
+                        <ul class="breadcrumbs uk-breadcrumb">
+                            <li><a href="#">Projects</a></li>
+                            <li><span>Interior Design</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Site Hero End -->
+
+    </div><!-- Hero Wrap End -->
+
+    <div class="pr__content" id="site-content">
+
+        <div class="pr__primary uk-section uk-section-medium" id="site-primary">
+            <div class="outer">
+                <div class="uk-container uk-position-relative">
+                    <div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
+                        <div class="uk-width-expand">
+                            <main class="pr__main" id="site-main">
+                                <article class="uk-article post type-project">
+
+                                    <div class="outer uk-grid uk-grid-large" data-uk-grid="">
+                                        <div class="inner uk-width-expand">
+                                            <div class="entry-body">
+                                                <h3 class="uk-h3">Summary.</h3>
+
+                                                <p>Bring to the table win-win survival strategies to ensure
+                                                    proactive domination. At the end of the day, going forward,
+                                                    a new normal that has evolved from generation X is on the runway
+                                                    heading towards a streamlined cloud solution. User
+                                                    generated content in real-time will have multiple touchpoints
+                                                    for offshoring.
+                                                </p>
+                                                <p>Capitalize on low hanging fruit to identify a ballpark value
+                                                    added activity to beta test. Override the digital
+                                                    divide with additional clickthroughs from DevOps. Nanotechnology
+                                                    immersion along the information highway will close
+                                                    the loop on focusing solely on the bottom line.
+                                                </p>
+                                                <p>Podcasting operational change management inside of workflows to
+                                                    establish a framework. Taking seamless key
+                                                    performance indicators offline to maximise the long tail.
+                                                    Keeping your eye on the ball while performing a deep dive
+                                                    on the start-up mentality to derive convergence on
+                                                    cross-platform integration.
+                                                </p>
+
+                                                <div class="pr__gallery uk-grid" data-uk-grid=""
+                                                    data-uk-lightbox="animation: scale">
+                                                    <div class="pr__gallery__item uk-width-1-1@m">
+                                                        <div class="featured-image">
+                                                            <div class="image pr__image__cover"
+                                                                data-src="assets/images/works/06.jpg" data-uk-img="">
+                                                            </div>
+                                                            <a href="assets/images/Works/06.jpg" class="link"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pr__gallery uk-grid uk-child-width-1-2@m"
+                                                    data-uk-grid="masonry: true;" data-uk-lightbox="animation: scale">
+                                                    <div class="pr__gallery__item">
+                                                        <div class="featured-image">
+                                                            <div class="image pr__image__cover"
+                                                                data-src="assets/images/works/07.jpg" data-uk-img="">
+                                                            </div>
+                                                            <a href="assets/images/Works/07.jpg" class="link"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pr__gallery__item">
+                                                        <div class="featured-image">
+                                                            <div class="image pr__image__cover pr__ratio__portrait"
+                                                                data-src="assets/images/works/08.jpg" data-uk-img="">
+                                                            </div>
+                                                            <a href="assets/images/Works/08.jpg" class="link"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pr__gallery__item">
+                                                        <div class="featured-image">
+                                                            <div class="image pr__image__cover"
+                                                                data-src="assets/images/works/09.jpg" data-uk-img="">
+                                                            </div>
+                                                            <a href="assets/images/Works/09.jpg" class="link"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pr__entry__sidebar uk-width-1-5@l">
+                                            <div class="pr__entry__meta pr__vr">
+                                                <h2 class="title">Project Details</h2>
+                                                <ul class="content uk-list uk-list-divider">
+                                                    <li class="author">
+                                                        <strong>Client</strong>
+                                                        <span>Aron Larsson</span>
+                                                    </li>
+                                                    <li class="date">
+                                                        <strong>Date</strong>
+                                                        <span>26 October, 2018</span>
+                                                    </li>
+                                                    <li class="category">
+                                                        <strong>Category</strong>
+                                                        <span><a href="#">Architecture</a>, <a href="#">Digital
+                                                                Art</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="pr__entry__share pr__small">
+                                                <a href="#" data-uk-tooltip="Share on Twitter"><i
+                                                        class="icon pr-logo-twitter"></i></a>
+                                                <a href="#" data-uk-tooltip="Share on Facebook"><i
+                                                        class="icon pr-logo-facebook"></i></a>
+                                                <a href="#" data-uk-tooltip="Share on Xing"><i
+                                                        class="icon pr-logo-xing"></i></a>
+                                            </div>
+                                            <div class="pr__entry__footer">
+                                                <a href="#"
+                                                    class="button uk-button uk-button-default uk-width-1-1">Visite
+                                                    site</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </article>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="pr__works pr__section section-slider uk-section uk-section-medium uk-section-default"
+            id="pr__works">
+            <div class="section-outer">
+                <div class="section-heading">
+                    <div class="uk-container">
+                        <div class="inner">
+                            <div>
+                                <hr class="line pr__hr__secondary">
+                                <h2 class="title uk-h3 pr__heading__secondary">Related Projects.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-inner">
+                    <div class="uk-container">
+                        <div class="items-listing works-boxes works-slider owl-carousel" data-items="3" data-margin="30"
+                            data-loop="true" data-center="true" data-autoplay="true" data-dots="true">
+                            <div class="item work-box">
+                                <div class="outer">
+                                    <div class="image pr__image__cover pr__ratio__square"
+                                        data-src="assets/images/works/01.jpg" data-uk-img=""></div>
+                                    <div class="inner">
+                                        <h3 class="title uk-h4">Expedia Solutions</h3>
+                                        <p class="category">Marketing / App</p>
+                                        <a href="#" class="link uk-position-cover"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item work-box">
+                                <div class="outer">
+                                    <div class="image pr__image__cover pr__ratio__square"
+                                        data-src="assets/images/works/02.jpg" data-uk-img=""></div>
+                                    <div class="inner">
+                                        <h3 class="title uk-h4">Bikeer</h3>
+                                        <p class="category">Design / Concept</p>
+                                        <a href="#" class="link uk-position-cover"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item work-box">
+                                <div class="outer">
+                                    <div class="image pr__image__cover pr__ratio__square"
+                                        data-src="assets/images/works/06.jpg" data-uk-img=""></div>
+                                    <div class="inner">
+                                        <h3 class="title uk-h4">Interior Design</h3>
+                                        <p class="category">Architecture / Digital Art</p>
+                                        <a href="#" class="link uk-position-cover"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item work-box">
+                                <div class="outer">
+                                    <div class="image pr__image__cover pr__ratio__square"
+                                        data-src="assets/images/works/05.jpg" data-uk-img=""></div>
+                                    <div class="inner">
+                                        <h3 class="title uk-h4">Electrica</h3>
+                                        <p class="category">UX Design / Web App</p>
+                                        <a href="#" class="link uk-position-cover"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Section: Works End -->
+
+    </div><!-- Site Content End -->
+    {% include 'partials/footer.html'%}
+    <!-- Site Footer End-->
+
+</div><!-- Site Wrapper End -->
+
+
+</body>
+{% endblock %}

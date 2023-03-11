@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<body class="home front-page">
+
+  {% include 'partials/loader.html'%}
+
+  {% include 'partials/mobile_nav.html'%}
+  <!-- Mobile Nav End -->
+
+  <div class="pr__wrapper" id="site-wrapper">
+
+    <div class="pr__hero__wrap pr__dark" style="background-image: url('static/assets/images/hero_02.jpg');"
+      id="site-hero">
+
+      {% include 'partials/header.html' %}
+      <!-- Site Header End -->
+
+      <section class="pr__hero uk-section" id="pr__hero">
+        <div class="uk-container">
+          <div class="section-inner">
+            <div class="hero-content uk-grid" data-uk-grid="">
+              <div class="uk-width-2-3@s">
+                <div class="brand">
+                  <h3 class="subtitle pr__heading__secondary">Build your Brand, Create your identity</h3>
+                </div>
+                <hr class="line pr__hr__primary">
+                <h2 class="title uk-heading-hero">Redefining the landscape of digital services</h2>
+                <a class="button uk-button uk-button-large uk-button-default uk-margin-top" href="#pr__services"
+                  data-uk-scroll="">Getting Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section><!-- Site Hero End -->
+
+      <section class="pr__features uk-section uk-padding-remove-bottom" id="pr_features">
+        <div class="uk-container">
+          <div class="section-inner">
+            <div class="items-listing features-boxes uk-grid uk-grid-match uk-grid-medium uk-child-width-1-3@m"
+              data-uk-grid="">
+              <div class="item feature-box uk-active">
+                <div class="inner">
+                  <i class="icon pr-chart-bars pr__icon__large"></i>
+                  <h3 class="title uk-h4">Future Vision.</h3>
+                  <hr class="line pr__hr__secondary">
+                  <p class="description">Build your brand with your long term vision in mind</p>
+                  <a href="#" class="link uk-position-cover"></a>
+                </div>
+              </div>
+              <div class="item feature-box">
+                <div class="inner">
+                  <i class="icon pr-rocket pr__icon__large"></i>
+                  <h3 class="title uk-h4">Product Design.</h3>
+                  <hr class="line pr__hr__secondary">
+                  <p class="description">Establish a strong brand right from the start. Your roots to a strong brand.
+                  </p>
+                  <a href="#" class="link uk-position-cover"></a>
+                </div>
+              </div>
+              <div class="item feature-box">
+                <div class="inner">
+                  <i class="icon pr-pie-chart pr__icon__large"></i>
+                  <h3 class="title uk-h4">Inovative Solutions.</h3>
+                  <hr class="line pr__hr__secondary">
+                  <p class="description">We use technology to support and dispatch new services so that the best
+                    solutions tend to be a combination of technology and services..</p>
+                  <a href="#" class="link uk-position-cover"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section><!-- Section: Features End -->
+
+    </div><!-- Hero Wrap End -->
+
+    <div class="pr__content" id="site-content">
+      <section class="pr__services pr__section pr__dark uk-section uk-section-large" id="pr__services">
+        <div class="section-outer">
+          <div class="section-heading pr__center">
+            <div class="uk-container">
+              <div class="inner">
+                <div class="center">
+                  <hr class="line pr__hr__secondary">
+                  <h2 class="title uk-h1">We’ve got everything you need to launch and grow your business</h2>
+                  <span class="subtitle pr__heading__secondary">With you every step</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="pr__vr__section">
+      <section class="pr__services pr__section pr__dark uk-section uk-section-large" id="pr__services">
+        <div class="section-outer">
+          <div class="section-heading">
+            <div class="uk-container">
+              <div class="inner">
+                <div class="left">
+                  <hr class="line pr__hr__secondary">
+                  <h2 class="title uk-h1">Services.</h2>
+                  <span class="subtitle pr__heading__secondary">We work with you, Not for you</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-inner">
+            <div class="uk-container">
+              {% if services %}
+              <div
+                class="items-listing services-boxes uk-grid uk-grid-match uk-grid-medium uk-child-width-1-3@m uk-child-width-1-2@s"
+                data-uk-grid="">
+                {% for service in services %}
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon {{service.icons}}"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">{{service.name}}</h5>
+                      <p class="description">{{service.description|truncatechars:190}}</p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="{{ service.get_absolute_url }}" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-browser"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Web Design (UI/UX Design) & Development</h5>
+                      <p class="description">Get a responsive website that meets your business goals. We create websites
+                        in all sizes from small starter sites to large eCommerce stores. We’ll create a custom website
+                        to focus your message for big returns.</p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-presentation"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Computer Graphics Training</h5>
+                      <p class="description">If you’d rather do it yourself, we can get you trained with personalized
+                        lessons that meet your specific objectives. Our working professionals teach you how to best
+                        approach design, programming and communication challenges. If your team needs to learn more
+                        quickly, we can help.</p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-clipboard"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Custom Software Development</h5>
+                      <p class="description">Custom software meets precise business objectives for a specific audience.
+                        We streamline the process and deliver custom software solutions that meet your goals and improve
+                        your bottom line.
+                      </p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-tools"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Design & Concept</h5>
+                      <p class="description">Lorem ipsum dolor sit amet elit. Tempore corrupti
+                        temporibus fuga earum asperiores.</p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-chat"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Social Media Management</h5>
+                      <p class="description">The business potential of social networks is immense. Brands can leverage
+                        social media platforms to successfully drive their objectives across the marketing funnel, from
+                        raising brand awareness to increasing store visits.
+                        But to be able to accomplish this, you need efficient social media teams, and thats why we are
+                        here.</p>
+                      <i class="more icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-target"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Branding, Identity & Logo Development</h5>
+                      <p class="description">Your branding and identity helps position and grow your business. We can
+                        help create strong, effective logos and visual identities so that you communicate your brand
+                        more clearly to your customers.</p>
+                      <i class="icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-lightbulb"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">Consultation Services</h5>
+                      <p class="description">Use our expertise in a way that balances your own skills to get the job
+                        done – from marketing and design to coding, programming, and databases. We strive to compliment
+                        your team and expertise so that you can deliver on time and within budget.</p>
+                      <i class="icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div>
+                <div class="item service-box style-two">
+                  <div class="inner">
+                    <i class="overlay-icon icon pr-line-search"></i>
+                    <div class="content">
+                      <h5 class="title uk-h5">SEO Optimization</h5>
+                      <p class="description">Search engine optimization is the process of improving the quality and
+                        quantity of website traffic to a website or a web page from search engines. SEO targets unpaid
+                        traffic rather than direct traffic or paid traffic. Let us reduce your cost of marketing and
+                        increase traffic in your website.</p>
+                      <i class="icon pr-arrow-right"></i>
+                    </div>
+                    <a href="#" class="link uk-position-cover"></a>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </section><!-- Section: Services End -->
+
+      <hr class="pr__vr__section">
+      <section class="pr__works pr__section pr__dark section-slider uk-section uk-section-large" id="pr__works">
+        <div class="section-outer">
+          <div class="section-heading">
+            <div class="uk-container">
+              <div class="inner">
+                <div class="left">
+                  <hr class="line pr__hr__secondary">
+                  <h2 class="title uk-h1">Projects.</h2>
+                  <span class="subtitle pr__heading__secondary">Things we've made</span>
+                </div>
+                <div class="right">
+                  <a class="button uk-button uk-button-default" href="{% url 'website:project' %}">View all</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if projects %}
+          <div class="section-inner">
+            <div class="uk-container uk-container-no">
+              <div class="items-listing works-boxes works-slider owl-carousel" data-items="4" data-margin="30"
+                data-loop="true" data-center="true" data-autoplay="true" data-dots="true">
+                {% for project in projects %}
+                <div class="item work-box">
+                  <div class="outer">
+                    <div class="image pr__image__cover pr__ratio__square" data-src="{{project.image.url}}"
+                      data-uk-img=""></div>
+                    <div class="inner">
+                      <h3 class="title uk-h4">{{project.name}}</h3>
+                      {% for tag in project.tags.all %}
+                      <p class="category">{{tag.name}}</p>
+                      {% endfor %}
+
+                      <a href="{{project.get_absolute_url}}" class="link uk-position-cover"></a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </section>
+      <hr class="pr__vr__section">
+      <section class="pr__clients pr__section pr__dark uk-section uk-section-large" id="pr__clients">
+        <div class="uk-container">
+          <div class="section-outer">
+            <div class="uk-flex uk-flex-middle uk-grid uk-grid-large" data-uk-grid="">
+              <div class="right uk-width-expand">
+                <div class="section-heading">
+                  <div class="inner">
+                    <div class="left">
+                      <hr class="line pr__hr__secondary">
+                      <h2 class="title uk-h1">What We Say.</h2>
+                      <span class="subtitle pr__heading__secondary">From the the big guy.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="section-inner">
+                  <div class="item client-box style-one">
+                    <div class="outer">
+                      <div class="inner">
+                        <p class="description">We are motivated by the satisfaction of our
+                          clients. Put your trust in us and let us share
+                          in your growth. BakPage is made up of a team of expert,
+                          committed and experienced people with a passion for
+                          digital markets. Our goal is to achieve continuous and sustainable
+                          growth of our clients.</p>
+                        <p class="client">Brian Josh, Designer / Developer</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="left uk-width-2-5@m uk-flex-first">
+                <div class="item client-box style-one client-image">
+                  <div class="image pr__image__cover pr__ratio__portrait"
+                    data-src="{% static 'assets/images/brian.jpg' %}" data-uk-img=""></div>
+                </div>
+              </div>
+            </div><!-- Grid End -->
+          </div><!-- Outer End -->
+        </div><!-- Container End -->
+      </section><!-- Section: Clients End -->
+      <!--
+      <div class="pr__clients__logos pr__section pr__dark uk-section uk-section-large uk-padding-remove-top"
+        id="pr__clients__logos">
+        <div class="uk-container">
+          <hr class="pr__hr__section">
+          <div class="section-outer uk-padding uk-padding-remove-bottom uk-padding-remove-horizontal">
+            <div class="uk-flex uk-flex-around uk-flex-middle uk-grid uk-grid-large" data-uk-grid="">
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/01.svg" alt="NOreal" data-uk-svg="">
+                </div>
+              </div>
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/02.svg" alt="Notron" data-uk-svg="">
+                </div>
+              </div>
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/03.svg" alt="Vorbes" data-uk-svg="">
+                </div>
+              </div>
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/04.svg" alt="Friday" data-uk-svg="">
+                </div>
+              </div>
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/05.svg" alt="Pantheon" data-uk-svg="">
+                </div>
+              </div>
+              <div class="item logo">
+                <div class="inner"><img src="assets/images/logos/06.svg" alt="Horus" data-uk-svg="">
+                </div>
+              </div>
+            </div> Grid End -->
+      <!--</div> Outer End -->
+      <!-- </div>Container End -->
+      <!-- </div>Section: Clients Logos End -->
+
+      <hr class="pr__vr__section">
+      <section class="pr__blog pr__section pr__dark section-slider uk-section uk-section-large" id="pr__blog">
+        <div class="section-outer">
+          <div class="section-heading pr__center">
+            <div class="uk-container">
+              <div class="inner">
+                <div class="center">
+                  <h2 class="title uk-h1">Latest Blog.</h2>
+                  <span class="subtitle pr__heading__secondary">Check out some of our thinking</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-inner">
+            <div class="uk-container uk-container-no">
+              <div class="blog-listing style-one blog-slider owl-carousel" data-items="4" data-loop="true"
+                data-center="true" data-margin="30" data-autoplay="true" data-dots="true">
+                {% for blog in blogs%}
+                <article class="post type-post">
+                  <div class="outer">
+                    <div class="featured-image">
+                      <div class="image pr__image__cover" data-src="{{blog.image.url}}" data-uk-img=""></div>
+                    </div>
+                    <div class="inner">
+                      <a class="category" href="#">
+                        {% for tag in blog.tags.all %}
+                        <span><a href="#">{{ tag.name }}</a></span>
+                        {% endfor %}</a>
+                      <h3 class="title uk-h5"><a href="#">{{blog.title}}</a></h3>
+                      <a href="#" class="more icon pr-arrow-right"></a>
+                      <a href="#" class="link"></a>
+                    </div>
+                  </div>
+                </article>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!--Inner End -->
+        </div>
+        <!--Outer End -->
+      </section>
+      <!--Section: Blog End -->
+
+      <hr class="pr__vr__section">
+    </div><!-- Site Content End -->
+
+    {% include 'partials/footer.html'%}
+    <!-- Site Footer End-->
+
+  </div><!-- Site Wrapper End -->
+
+
+</body>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>BakPage Labs</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="msapplication-TileColor" content="#E9204F">
+  <meta name="theme-color" content="#E9204F">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <!--   <link rel="manifest" href="assets/images/site.webmanifest">
+  <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#E9204F"> -->
+  <script data-ad-client="ca-pub-8128509305831596" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="stylesheet" href="{% static 'assets/css/normalize.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/pr.animation.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/uikit.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/fonts.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/pixeicons.css'%}" />
+  <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+
+<body>
+  {% include 'partials/messages.html' %}
+  <!-- Content Row -->
+  {% block content %}
+
+  {% endblock %}
+  <div id="pr__contact__form" class="pr__contact__form pr__dark uk-modal-full" data-uk-modal="">
+    <div class="uk-modal-dialog" data-uk-height-viewport="">
+      <div class="form-outer">
+        <div class="uk-container uk-container-xsmall">
+          <div class="form-inner uk-position-relative">
+            <button class="uk-modal-close-full" type="button" data-uk-close="ratio: 2;"><span>Close</span></button>
+            <h2 class="uk-modal-title uk-h1">Let's Talk?</h2>
+            <p>Let’s make something awesome together</p>
+            <form class="pr__contact pr__form" action="mailto:info@bakpagelabs.com" method="POST">
+              <div class="pr__form__group">
+                <label for="name">Your Name <span class="required">*</span></label>
+                <input class="pr-input" id="name" name="name" type="text" />
+              </div>
+              <div class="pr__form__group">
+                <label for="email">Your E-Mail <span class="required">*</span></label>
+                <input class="pr-input" id="email" name="email" type="text" />
+              </div>
+              <!-- 
+              <div class="pr__form__group">
+                <label for="subject">Your Subject <span class="required">*</span></label>
+                <input class="pr-input" id="subject" name="subject" type="text" />
+              </div>
+              <div class="pr__form__group">
+                <label for="budget">What's your budget range?</label>
+                <select class="uk-select" id="budget" name="budget">
+                  <option>&nbsp;</option>
+                  <option>Low budget</option>
+                  <option>$1,000 — $2,000</option>
+                  <option>$2,000 — $5,000</option>
+                  <option>$5,000 — $10,000</option>
+                  <option>$10,000+</option>
+                </select>
+              </div> -->
+              <div class="pr__form__group">
+                <label for="message">Your message <span class="required">*</span></label>
+                <textarea class="pr-textarea" id="message" name="message"></textarea>
+              </div>
+              <p class="pr__form__group uk-margin-large">
+
+              </p><input class="uk-button uk-button-large uk-button-primary" type="submit" name="submit"
+                value="Submit"></input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- Contact Form Popup End -->
+
+
+
+  <!-- Needed Scripts -->
+  <script language="JavaScript">
+    var frmvalidator = new Validator("contactform");
+    frmvalidator.addValidation("name", "req", "Please provide your name");
+    frmvalidator.addValidation("email", "req", "Please provide your email");
+    frmvalidator.addValidation("email", "email",
+      "Please enter a valid email address");
+  </script>
+
+  <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+  <script src="{% static 'assets/js/anime.min.js'%}"></script>
+  <script src="{% static 'assets/js/pr.animation.js'%}"></script>
+  <script src="{% static 'assets/js/uikit.min.js'%}"></script>
+  <script src="{% static 'assets/js/owl.carousel.min.js'%}"></script>
+  <script src="{% static 'assets/js/validate.js'%}"></script>
+  <script src="{% static 'assets/js/main.js'%}"></script>
+</body>
+
+</html>

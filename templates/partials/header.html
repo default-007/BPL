@@ -1,0 +1,78 @@
+{% load static %}
+<header class="pr__header pr__dark" data-uk-sticky="top: 100vh; animation: uk-animation-slide-top;">
+  <div class="uk-container">
+    <div class="inner">
+      <div class="logo" style="height: 100px; width: 100px; padding-top: 15px;">
+        <a href="/">
+          <image src="{%static 'assets/logo.png'%}"></image>
+        </a>
+      </div>
+
+      <div class="navbar pr-font-second">
+        <nav class="menu" data-uk-scrollspy-nav="offset: 0; closest: li; scroll: true">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'website:about' %}">About</a></li>
+            <li><a href="{% url 'website:service' %}">Services</a></li>
+            <li><a href="{% url 'website:project' %}">Projects</a></li>
+            <li><a href="{% url 'website:blog' %}">Blog</a></li>
+            <li><a id="pr__contact" href="#pr__contact__form" data-uk-toggle="">Contact</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="navbar-tigger" data-uk-toggle="target: #navbar-mobile">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</header>
+<div id="pr__contact__form" class="pr__contact__form pr__dark uk-modal-full" data-uk-modal="">
+  <div class="uk-modal-dialog" data-uk-height-viewport="">
+    <div class="form-outer">
+      <div class="uk-container uk-container-xsmall">
+        <div class="form-inner uk-position-relative">
+          <button class="uk-modal-close-full" type="button" data-uk-close="ratio: 2;"><span>Close</span></button>
+          <h2 class="uk-modal-title uk-h1">Let's Talk?</h2>
+          <p>Let’s make something awesome together</p>
+          <form class="pr__contact pr__form" action="mailto:info@bakpagelabs.com" method="POST">
+            <div class="pr__form__group">
+              <label for="name">Your Name <span class="required">*</span></label>
+              <input class="pr-input" id="name" name="name" type="text" />
+            </div>
+            <div class="pr__form__group">
+              <label for="email">Your E-Mail <span class="required">*</span></label>
+              <input class="pr-input" id="email" name="email" type="text" />
+            </div>
+            <!-- 
+              <div class="pr__form__group">
+                <label for="subject">Your Subject <span class="required">*</span></label>
+                <input class="pr-input" id="subject" name="subject" type="text" />
+              </div>
+              <div class="pr__form__group">
+                <label for="budget">What's your budget range?</label>
+                <select class="uk-select" id="budget" name="budget">
+                  <option>&nbsp;</option>
+                  <option>Low budget</option>
+                  <option>$1,000 — $2,000</option>
+                  <option>$2,000 — $5,000</option>
+                  <option>$5,000 — $10,000</option>
+                  <option>$10,000+</option>
+                </select>
+              </div> -->
+            <div class="pr__form__group">
+              <label for="message">Your message <span class="required">*</span></label>
+              <textarea class="pr-textarea" id="message" name="message"></textarea>
+            </div>
+            <p class="pr__form__group uk-margin-large">
+
+            </p><input class="uk-button uk-button-large uk-button-primary" type="submit" name="submit"
+              value="Submit"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
