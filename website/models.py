@@ -16,9 +16,7 @@ class Service(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:service", kwargs={
-            'slug': self.slug
-        })
+        return reverse("website:service", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.description)
@@ -28,19 +26,19 @@ class Service(models.Model):
         try:
             url = self.image.url
         except:
-            url = ''
+            url = ""
         return url
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=150)
     image = models.ImageField()
     image_1 = models.ImageField(blank=True, null=True)
     image_2 = models.ImageField(blank=True, null=True)
@@ -49,7 +47,8 @@ class Project(models.Model):
     client = models.CharField(max_length=100, blank=True, null=True)
     description = MarkdownxField()
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, blank=True, null=True)
+        Category, on_delete=models.CASCADE, blank=True, null=True
+    )
     slug = models.SlugField()
     tags = TaggableManager()
 
@@ -57,7 +56,7 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:project", kwargs={'slug': self.slug})
+        return reverse("website:project", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.description)
@@ -67,7 +66,7 @@ class Project(models.Model):
         try:
             url = self.image_1.url
         except:
-            url = ''
+            url = ""
         return url
 
     @property
@@ -75,7 +74,7 @@ class Project(models.Model):
         try:
             url = self.image_2.url
         except:
-            url = ''
+            url = ""
         return url
 
     @property
@@ -83,13 +82,13 @@ class Project(models.Model):
         try:
             url = self.image_3.url
         except:
-            url = ''
+            url = ""
         return url
 
 
 class Blog(models.Model):
-    title = models.CharField(max_length=30)
-    author = models.CharField(max_length=30)
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField()
     text = MarkdownxField()
@@ -101,7 +100,7 @@ class Blog(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("website:blog", kwargs={'slug': self.slug})
+        return reverse("website:blog", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.text)
