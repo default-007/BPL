@@ -43,10 +43,6 @@
                                                     <p class="uk-text-lead">Bring to the table win-win survival
                                                         strategies to ensure proactive domination. At the end of the
                                                         day, going forward,
-                                                        a new normal that has evolved from generation X is on the runway
-                                                        heading towards a streamlined cloud solution. User
-                                                        generated content in real-time will have multiple touchpoints
-                                                        for offshoring.
                                                     </p>
 
                                                     <h3 class="uk-h3">{{object.title}}</h3>
@@ -58,7 +54,8 @@
                                                         <figcaption class="wp-caption-text">Success is largely a matter
                                                             of holding on after others have let go.</figcaption>
                                                     </figure>
-                                                    <p>{{object.text}}</p>
+                                                    <p>{{object.text|safe}}</p>
+                                                    <p>{{object.formatted_markdown|safe }}</p>
                                                     <br>
                                                     <blockquote class="uk-text-left">
                                                         <p>{{object.quote}}</p>
