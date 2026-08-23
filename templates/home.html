@@ -24,12 +24,12 @@
             <div class="hero-content uk-grid" data-uk-grid="">
               <div class="uk-width-2-3@s">
                 <div class="brand">
-                  <h3 class="subtitle pr__heading__secondary">Build your Brand, Create your identity</h3>
+                  <h3 class="subtitle pr__heading__secondary">Technology Partner for Growing Businesses</h3>
                 </div>
                 <hr class="line pr__hr__primary">
-                <h2 class="title uk-heading-hero">Redefining the landscape of digital services</h2>
+                <h2 class="title uk-heading-hero">We build the software your business runs on</h2>
                 <a class="button uk-button uk-button-large uk-button-default uk-margin-top" href="#pr__services"
-                  data-uk-scroll="">Getting Started</a>
+                  data-uk-scroll="">See What We Build</a>
               </div>
             </div>
           </div>
@@ -44,29 +44,27 @@
               <div class="item feature-box uk-active">
                 <div class="inner">
                   <i class="icon pr-chart-bars pr__icon__large"></i>
-                  <h3 class="title uk-h4">Future Vision.</h3>
+                  <h3 class="title uk-h4">AI-First Approach.</h3>
                   <hr class="line pr__hr__secondary">
-                  <p class="description">Build your brand with your long term vision in mind</p>
+                  <p class="description">We integrate AI into real business workflows — not as a gimmick, but as infrastructure that saves time and money.</p>
                   <a href="#" class="link uk-position-cover"></a>
                 </div>
               </div>
               <div class="item feature-box">
                 <div class="inner">
                   <i class="icon pr-rocket pr__icon__large"></i>
-                  <h3 class="title uk-h4">Product Design.</h3>
+                  <h3 class="title uk-h4">Ship Fast, Iterate.</h3>
                   <hr class="line pr__hr__secondary">
-                  <p class="description">Establish a strong brand right from the start. Your roots to a strong brand.
-                  </p>
+                  <p class="description">Working software every two weeks. No six-month vanishing acts — you see progress, give feedback, and stay in control.</p>
                   <a href="#" class="link uk-position-cover"></a>
                 </div>
               </div>
               <div class="item feature-box">
                 <div class="inner">
                   <i class="icon pr-pie-chart pr__icon__large"></i>
-                  <h3 class="title uk-h4">Inovative Solutions.</h3>
+                  <h3 class="title uk-h4">Built for East Africa.</h3>
                   <hr class="line pr__hr__secondary">
-                  <p class="description">We use technology to support and dispatch new services so that the best
-                    solutions tend to be a combination of technology and services..</p>
+                  <p class="description">M-Pesa integration, offline-capable systems, and interfaces designed for real network conditions and real users.</p>
                   <a href="#" class="link uk-position-cover"></a>
                 </div>
               </div>
@@ -80,30 +78,13 @@
     <div class="pr__content" id="site-content">
       <section class="pr__services pr__section pr__dark uk-section uk-section-large" id="pr__services">
         <div class="section-outer">
-          <div class="section-heading pr__center">
-            <div class="uk-container">
-              <div class="inner">
-                <div class="center">
-                  <hr class="line pr__hr__secondary">
-                  <h2 class="title uk-h1">We’ve got everything you need to launch and grow your business</h2>
-                  <span class="subtitle pr__heading__secondary">With you every step</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <hr class="pr__vr__section">
-      <section class="pr__services pr__section pr__dark uk-section uk-section-large" id="pr__services">
-        <div class="section-outer">
           <div class="section-heading">
             <div class="uk-container">
               <div class="inner">
                 <div class="left">
                   <hr class="line pr__hr__secondary">
-                  <h2 class="title uk-h1">Services.</h2>
-                  <span class="subtitle pr__heading__secondary">We work with you, Not for you</span>
+                  <h2 class="title uk-h1">What We Build.</h2>
+                  <span class="subtitle pr__heading__secondary">AI-era technology for businesses that want to move fast</span>
                 </div>
               </div>
             </div>
@@ -120,124 +101,20 @@
                     <i class="overlay-icon icon {{service.icons}}"></i>
                     <div class="content">
                       <h5 class="title uk-h5">{{service.name}}</h5>
-                      <p class="description">{{service.description|truncatechars:190}}</p>
+                      {% if service.tagline %}
+                      <p class="description">{{service.tagline}}</p>
+                      {% else %}
+                      <p class="description">{{service.description|truncatechars:120}}</p>
+                      {% endif %}
                       <i class="more icon pr-arrow-right"></i>
                     </div>
                     <a href="{{ service.get_absolute_url }}" class="link uk-position-cover"></a>
                   </div>
                 </div>
                 {% endfor %}
-                <!-- <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-browser"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Web Design (UI/UX Design) & Development</h5>
-                      <p class="description">Get a responsive website that meets your business goals. We create websites
-                        in all sizes from small starter sites to large eCommerce stores. We’ll create a custom website
-                        to focus your message for big returns.</p>
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-presentation"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Computer Graphics Training</h5>
-                      <p class="description">If you’d rather do it yourself, we can get you trained with personalized
-                        lessons that meet your specific objectives. Our working professionals teach you how to best
-                        approach design, programming and communication challenges. If your team needs to learn more
-                        quickly, we can help.</p>
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-clipboard"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Custom Software Development</h5>
-                      <p class="description">Custom software meets precise business objectives for a specific audience.
-                        We streamline the process and deliver custom software solutions that meet your goals and improve
-                        your bottom line.
-                      </p>
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-tools"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Design & Concept</h5>
-                      <p class="description">Lorem ipsum dolor sit amet elit. Tempore corrupti
-                        temporibus fuga earum asperiores.</p>
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-chat"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Social Media Management</h5>
-                      <p class="description">The business potential of social networks is immense. Brands can leverage
-                        social media platforms to successfully drive their objectives across the marketing funnel, from
-                        raising brand awareness to increasing store visits.
-                        But to be able to accomplish this, you need efficient social media teams, and thats why we are
-                        here.</p>
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-target"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Branding, Identity & Logo Development</h5>
-                      <p class="description">Your branding and identity helps position and grow your business. We can
-                        help create strong, effective logos and visual identities so that you communicate your brand
-                        more clearly to your customers.</p>
-                      <i class="icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-lightbulb"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">Consultation Services</h5>
-                      <p class="description">Use our expertise in a way that balances your own skills to get the job
-                        done – from marketing and design to coding, programming, and databases. We strive to compliment
-                        your team and expertise so that you can deliver on time and within budget.</p>
-                      <i class="icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon pr-line-search"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">SEO Optimization</h5>
-                      <p class="description">Search engine optimization is the process of improving the quality and
-                        quantity of website traffic to a website or a web page from search engines. SEO targets unpaid
-                        traffic rather than direct traffic or paid traffic. Let us reduce your cost of marketing and
-                        increase traffic in your website.</p>
-                      <i class="icon pr-arrow-right"></i>
-                    </div>
-                    <a href="#" class="link uk-position-cover"></a>
-                  </div>
-                </div> -->
               </div>
+              {% endif %}
             </div>
-            {% endif %}
           </div>
         </div>
       </section><!-- Section: Services End -->

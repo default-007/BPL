@@ -6,11 +6,16 @@ from taggit.managers import TaggableManager
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=60, unique=True)
+    tagline = models.CharField(max_length=120, blank=True, null=True)
     image = models.ImageField(null=True, blank=True)
     icons = models.CharField(max_length=30, blank=True, null=True)
     description = MarkdownxField()
     slug = models.SlugField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return self.name

@@ -19,7 +19,12 @@
 					<div class="section-inner">
 						<div class="hero-content">
 							<hr class="line pr__hr__secondary">
-							<h2 class="page-title  uk-heading-primary">{{object.name}}</h2>
+							<h2 class="page-title uk-heading-primary">{{object.name}}</h2>
+							{% if object.tagline %}
+							<p class="uk-text-lead" style="color: rgba(255,255,255,0.7); margin-top: 15px;">
+								{{object.tagline}}
+							</p>
+							{% endif %}
 							<ul class="breadcrumbs uk-breadcrumb">
 								<li><a href="{% url 'website:service' %}">Services</a></li>
 								<li><span>{{object.name}}</span></li>
@@ -36,39 +41,50 @@
 			<div class="pr__primary uk-section uk-section-large has-sidebar" id="site-primary">
 				<div class="outer">
 					<div class="uk-container uk-position-relative">
-						<div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
+						<div class="inner uk-grid uk-grid-large" data-uk-grid="">
 							<div class="uk-width-expand">
 								<main class="pr__main" id="site-main">
 									<article class="uk-article page type-page">
-
 										<div class="outer">
 											<div class="inner">
-												<div class="entry-body">
-													<div class="image pr__image__cover pr__ratio__square" data-src="{{service.imageURL}}"
-														data-uk-img="">
+												<div class="entry-body service-detail-content">
+													{% if object.image %}
+													<div class="image pr__image__cover pr__ratio__landscape" data-src="{{object.imageURL}}"
+														data-uk-img="" style="margin-bottom: 40px;">
 													</div>
-													<br>
-													<hr class="pr__vr__section">
-													<br>
+													{% endif %}
 													<section>{{object.formatted_markdown|safe }}</section>
-
 												</div>
 											</div>
 										</div>
-
 									</article>
+
+									<!-- CTA within service detail -->
+									<div class="uk-margin-large-top uk-padding uk-background-muted" style="border-left: 4px solid #E9204F;">
+										<h3 class="uk-h4 uk-margin-small-bottom">Ready to get started?</h3>
+										<p class="uk-margin-small-bottom">Let's discuss how {{object.name|lower}} can work for your business.</p>
+										<a class="uk-button uk-button-primary" href="#pr__contact__form" data-uk-toggle="">Get in Touch</a>
+									</div>
 								</main>
 							</div>
 							<div class="uk-width-1-4@l">
 								<aside class="pr-sidebar widget-area" id="site-sidebar">
 									<div style="z-index: 1;" data-uk-sticky="offset: 120; bottom: true">
 										<section class="widget widget_nav_menu">
-											<h2 class="widget-title">Core Services</h2>
+											<h2 class="widget-title">Our Services</h2>
 											<ul class="content">
-												{% for object in service_list %}
-												<li><a href="{{object.get_absolute_url}}">{{object.name}}</a></li>
+												{% for svc in service_list %}
+												<li{% if svc.slug == object.slug %} class="uk-active"{% endif %}>
+													<a href="{{svc.get_absolute_url}}">{{svc.name}}</a>
+												</li>
 												{% endfor %}
 											</ul>
+										</section>
+
+										<section class="widget uk-margin-large-top">
+											<h2 class="widget-title">Let's Talk</h2>
+											<p>Have a project in mind? We'd love to hear about it.</p>
+											<a class="uk-button uk-button-primary uk-width-1-1" href="#pr__contact__form" data-uk-toggle="">Contact Us</a>
 										</section>
 									</div>
 								</aside>
