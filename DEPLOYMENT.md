@@ -95,6 +95,38 @@ With `DEBUG=False`, Django redirects HTTP to HTTPS and marks cookies secure.
 - Once HTTPS works everywhere, you can raise `SECURE_HSTS_SECONDS` to
   `31536000`.
 
+## 6. Contact form email
+
+The contact form emails each enquiry to `CONTACT_EMAIL`, with Reply-To set to
+the visitor so you can answer straight from your inbox. Every enquiry is also
+saved and listed under **Contact messages** in `/admin/`, so none are lost if
+sending fails.
+
+1. cPanel > **Email Accounts** > Create, e.g. `info@bakpagelabs.com`.
+2. Click **Connect Devices** on that account and note the SMTP server and port
+   (usually `mail.bakpagelabs.com`, port `465` with SSL).
+3. Set these environment variables in Setup Python App (or `.env`), then restart:
+
+   | Variable | Value |
+   |---|---|
+   | `EMAIL_HOST` | `mail.bakpagelabs.com` |
+   | `EMAIL_PORT` | `465` (SSL) or `587` (STARTTLS) |
+   | `EMAIL_HOST_USER` | `info@bakpagelabs.com` |
+   | `EMAIL_HOST_PASSWORD` | the mailbox password |
+   | `DEFAULT_FROM_EMAIL` | `info@bakpagelabs.com` (must be a mailbox on your domain) |
+   | `CONTACT_EMAIL` | where enquiries should go |
+
+4. Test it from the terminal:
+
+   ```bash
+   python manage.py sendtestemail info@bakpagelabs.com
+   ```
+
+If emails land in spam, check cPanel > **Email Deliverability** and fix any
+SPF/DKIM issues it reports for the domain. Each IP address can send 5 messages
+per hour (`CONTACT_RATE_LIMIT`), and a hidden honeypot field filters out
+simple bots.
+
 ## Static and media files
 
 - **Static files** (CSS/JS/fonts) are collected into `staticfiles/` and served
@@ -125,8 +157,11 @@ static files, runs the deploy checks, and restarts Passenger.
   (e.g. `SECRET_KEY`), a wrong DB password, or requirements not installed in
   the app's virtualenv.
 - **400 Bad Request**: the domain isn't in `ALLOWED_HOSTS`.
-- **403 CSRF failure on admin login**: add `https://yourdomain` to
-  `CSRF_TRUSTED_ORIGINS`.
+- **403 CSRF failure on admin login or the contact form**: add
+  `https://yourdomain` to `CSRF_TRUSTED_ORIGINS`.
+- **Contact form says thanks but no email arrives**: the enquiry is still in
+  the admin with "Email sent" unticked. Check `logs/passenger.log` for the
+  SMTP error, and run `python manage.py sendtestemail` to test the settings.
 - **Unstyled pages**: run `collectstatic` and restart.
 - Temporarily setting `DEBUG=True` shows full error pages. Turn it off again
   immediately afterwards.

@@ -67,11 +67,11 @@ TEMPLATES = [
     },
 ]
 MESSAGE_TAGS = {
-    messages.DEBUG: "alert-info",
-    messages.INFO: "alert-info",
-    messages.SUCCESS: "alert-success",
-    messages.WARNING: "alert-warning",
-    messages.ERROR: "alert-danger",
+    messages.DEBUG: "uk-alert-primary",
+    messages.INFO: "uk-alert-primary",
+    messages.SUCCESS: "uk-alert-success",
+    messages.WARNING: "uk-alert-warning",
+    messages.ERROR: "uk-alert-danger",
 }
 
 WSGI_APPLICATION = "bakpage.wsgi.application"
@@ -162,6 +162,39 @@ STORAGES = {
         ),
     },
 }
+
+# Email (contact form)
+# On HostPinnacle, create a mailbox in cPanel > Email Accounts and use its
+# "Connect Devices" SMTP settings (usually mail.<domain>, port 465, SSL).
+# Without EMAIL_HOST, emails are printed to the console instead of sent.
+
+EMAIL_HOST = config("EMAIL_HOST", default="")
+EMAIL_BACKEND = config(
+    "EMAIL_BACKEND",
+    default=(
+        "django.core.mail.backends.smtp.EmailBackend"
+        if EMAIL_HOST
+        else "django.core.mail.backends.console.EmailBackend"
+    ),
+)
+EMAIL_PORT = config("EMAIL_PORT", default=465, cast=int)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=EMAIL_PORT == 465, cast=bool)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=EMAIL_PORT == 587, cast=bool)
+EMAIL_TIMEOUT = 20
+
+# Sender must be a mailbox on your own domain, or mail may be marked as spam.
+DEFAULT_FROM_EMAIL = config(
+    "DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER or "info@bakpagelabs.com"
+)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+# Where contact form enquiries are delivered.
+CONTACT_EMAIL = config("CONTACT_EMAIL", default="info@bakpagelabs.com")
+# Maximum contact form submissions per IP address per hour.
+CONTACT_RATE_LIMIT = config("CONTACT_RATE_LIMIT", default=5, cast=int)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

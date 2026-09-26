@@ -109,3 +109,23 @@ class Blog(models.Model):
 
     def formatted_markdown(self):
         return markdownify(self.text)
+
+
+class ContactMessage(models.Model):
+    """An enquiry sent through the site's contact form.
+
+    Stored so no lead is lost if the notification email can't be delivered.
+    """
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    email_sent = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} <{self.email}>"
