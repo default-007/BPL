@@ -4,7 +4,7 @@ HostPinnacle's shared and reseller hosting uses cPanel. Python apps run through
 **Setup Python App** (CloudLinux Python Selector + Phusion Passenger). The
 project ships a `passenger_wsgi.py` entry point for that setup.
 
-Replace `cpaneluser` below with your cPanel username and `bapagelabs.com`
+Replace `cpaneluser` below with your cPanel username and `bakpagelabs.com`
 with your domain.
 
 ## Requirements
@@ -41,7 +41,7 @@ cPanel > **Setup Python App** > **Create Application**:
 |---|---|
 | Python version | 3.11 or newer |
 | Application root | `bpl` |
-| Application URL | `bapagelabs.com` (leave the path empty) |
+| Application URL | `bakpagelabs.com` (leave the path empty) |
 | Application startup file | `passenger_wsgi.py` |
 | Application Entry point | `application` |
 | Passenger log file | `/home/cpaneluser/bpl/logs/passenger.log` |
