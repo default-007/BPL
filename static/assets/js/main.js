@@ -112,21 +112,40 @@ jQuery(document).ready(function ($) {
                     required: true,
                     email: true
                 },
-                subject: {
-                    required: true
-                },
                 message: {
                     required: true
                 }
             },
             submitHandler: function (form) {
-                // Sending values with ajax request
-                $.post($(form).attr('action'), $(form).serialize(), function (response) {
-                    $(form).parent('div').append(response);
-                    $(form).find('input[type="text"]').val('');
-                    $(form).find('input[type="email"]').val('');
-                    $(form).find('select').val('');
-                    $(form).find('textarea').val('');
+                var $form = $(form);
+                var $status = $form.find('.pr__contact__status');
+                var $button = $form.find('[type="submit"]');
+
+                function showStatus(ok, text) {
+                    $status
+                        .removeClass('uk-alert-success uk-alert-danger')
+                        .addClass('uk-alert ' + (ok ? 'uk-alert-success' : 'uk-alert-danger'))
+                        .text(text);
+                }
+
+                $button.prop('disabled', true);
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'POST',
+                    data: $form.serialize(),
+                    dataType: 'json'
+                }).done(function (response) {
+                    showStatus(true, response.message);
+                    $form.find('input[type="text"], input[type="email"], textarea').val('');
+                }).fail(function (xhr) {
+                    var response = xhr.responseJSON || {};
+                    var text = response.message || 'Sorry, something went wrong. Please email us at info@bakpagelabs.com.';
+                    $.each(response.errors || {}, function (field, errors) {
+                        text += ' ' + errors.join(' ');
+                    });
+                    showStatus(false, text);
+                }).always(function () {
+                    $button.prop('disabled', false);
                 });
                 return false;
             }

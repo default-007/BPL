@@ -1,7 +1,7 @@
 from django.db import models
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
-from django.shortcuts import reverse
+from django.urls import reverse
 from taggit.managers import TaggableManager
 
 
@@ -21,7 +21,7 @@ class Service(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:service", kwargs={"slug": self.slug})
+        return reverse("website:service_detail", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.description)
@@ -30,7 +30,7 @@ class Service(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except ValueError:
             url = ""
         return url
 
@@ -61,7 +61,7 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:project", kwargs={"slug": self.slug})
+        return reverse("website:project_detail", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.description)
@@ -70,7 +70,7 @@ class Project(models.Model):
     def image1URL(self):
         try:
             url = self.image_1.url
-        except:
+        except ValueError:
             url = ""
         return url
 
@@ -78,7 +78,7 @@ class Project(models.Model):
     def image2URL(self):
         try:
             url = self.image_2.url
-        except:
+        except ValueError:
             url = ""
         return url
 
@@ -86,7 +86,7 @@ class Project(models.Model):
     def image3URL(self):
         try:
             url = self.image_3.url
-        except:
+        except ValueError:
             url = ""
         return url
 
@@ -105,7 +105,27 @@ class Blog(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("website:blog", kwargs={"slug": self.slug})
+        return reverse("website:blog_detail", kwargs={"slug": self.slug})
 
     def formatted_markdown(self):
         return markdownify(self.text)
+
+
+class ContactMessage(models.Model):
+    """An enquiry sent through the site's contact form.
+
+    Stored so no lead is lost if the notification email can't be delivered.
+    """
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    email_sent = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} <{self.email}>"

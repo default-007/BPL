@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static humanize%}
-{% load crispy_forms_tags %}
 {% block content %}
 
 <body class="page-template page-template-full single single-post">
@@ -10,7 +9,7 @@
     <!-- Mobile Nav End -->
 
     <div class="pr__wrapper" id="site-wrapper">
-        <div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+        <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
             data-uk-parallax="bgy: -200" id="site-hero">
             {% include 'partials/header.html' %}
 
@@ -18,7 +17,7 @@
                 <div class="uk-container">
                     <div class="section-inner">
                         <div class="hero-content">
-                            <a class="category" href="blog/">Blog</a>
+                            <a class="category" href="{% url 'website:blog' %}">Blog</a>
                             <h2 class="page-title uk-h1">{{object.title}}</h2>
                         </div>
                     </div>

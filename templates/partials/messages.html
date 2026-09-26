@@ -1,8 +1,10 @@
-{% for message in messages %}
-<div class="alert {{ message.tags }} alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  {{ message }}
+{% if messages %}
+<div class="pr__messages" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1100; width: min(90%, 600px);">
+  {% for message in messages %}
+  <div class="uk-alert {{ message.tags }}" data-uk-alert="" role="alert">
+    <a class="uk-alert-close" data-uk-close=""></a>
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
 </div>
-{% endfor %}
+{% endif %}

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
 {% block content %}
 
 <body class="home front-page">
@@ -12,7 +11,7 @@
 
   <div class="pr__wrapper" id="site-wrapper">
 
-    <div class="pr__hero__wrap pr__dark" style="background-image: url('static/assets/images/hero_02.jpg');"
+    <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_02.jpg' %}');"
       id="site-hero">
 
       {% include 'partials/header.html' %}
@@ -204,42 +203,6 @@
           </div><!-- Outer End -->
         </div><!-- Container End -->
       </section><!-- Section: Clients End -->
-      <!--
-      <div class="pr__clients__logos pr__section pr__dark uk-section uk-section-large uk-padding-remove-top"
-        id="pr__clients__logos">
-        <div class="uk-container">
-          <hr class="pr__hr__section">
-          <div class="section-outer uk-padding uk-padding-remove-bottom uk-padding-remove-horizontal">
-            <div class="uk-flex uk-flex-around uk-flex-middle uk-grid uk-grid-large" data-uk-grid="">
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/01.svg" alt="NOreal" data-uk-svg="">
-                </div>
-              </div>
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/02.svg" alt="Notron" data-uk-svg="">
-                </div>
-              </div>
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/03.svg" alt="Vorbes" data-uk-svg="">
-                </div>
-              </div>
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/04.svg" alt="Friday" data-uk-svg="">
-                </div>
-              </div>
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/05.svg" alt="Pantheon" data-uk-svg="">
-                </div>
-              </div>
-              <div class="item logo">
-                <div class="inner"><img src="assets/images/logos/06.svg" alt="Horus" data-uk-svg="">
-                </div>
-              </div>
-            </div> Grid End -->
-      <!--</div> Outer End -->
-      <!-- </div>Container End -->
-      <!-- </div>Section: Clients Logos End -->
-
       <hr class="pr__vr__section">
       <section class="pr__blog pr__section pr__dark section-slider uk-section uk-section-large" id="pr__blog">
         <div class="section-outer">
