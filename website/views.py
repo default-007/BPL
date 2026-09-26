@@ -1,17 +1,10 @@
-from django.conf import settings
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
-from django.views.generic import ListView, DetailView, View, CreateView
-from django.http import HttpResponse, HttpResponseRedirect
-from taggit.models import Tag
-from .models import *
+from django.shortcuts import render
+from django.views.generic import DetailView, ListView, View
+
+from .models import Blog, Project, Service
 
 
 class HomeView(View):
-    #common_tags = Post.tags.most_common()[:4]
-
     def get(self, request):
         services = Service.objects.all()
         projects = Project.objects.all()

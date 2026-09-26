@@ -1,0 +1,126 @@
+[
+  {
+    "model": "website.category",
+    "pk": 1,
+    "fields": {
+      "name": "Branding"
+    }
+  },
+  {
+    "model": "website.project",
+    "pk": 1,
+    "fields": {
+      "name": "Azraa",
+      "image": "AZRAA-base_SwBXDpk.png",
+      "image_1": "",
+      "image_2": "",
+      "image_3": "",
+      "link": null,
+      "client": null,
+      "description": "Azraa naturals",
+      "category": 1,
+      "slug": "azraa"
+    }
+  },
+  {
+    "model": "website.blog",
+    "pk": 1,
+    "fields": {
+      "title": "10 ways custom software develo",
+      "author": "Default",
+      "created_at": "2023-03-12T18:53:01.047Z",
+      "image": "download.png",
+      "text": "1. Streamlined Workflows: Custom software development can help streamline workflows by automating repetitive tasks, reducing errors, and improving efficiency. This can lead to increased productivity, faster turnaround times, and better overall performance.\r\n\r\n2. Enhanced Customer Experience: With custom software, you can create unique and personalized experiences for your customers. This can include features like personalized recommendations, easy checkout processes, and personalized messaging. By providing a better customer experience, you can build brand loyalty and increase customer retention.\r\n\r\nImproved Data Management: Custom software development can help you better manage and analyze your data. This can include features like data visualization, data analytics, and predictive modeling. With better data management, you can make better business decisions and improve your bottom line.\r\n\r\nIncreased Security: Custom software development can help you build secure systems that protect your data from external threats. This can include features like encryption, multi-factor authentication, and intrusion detection. By improving your security, you can protect your business and your customers from cyberattacks.\r\n\r\nScalability: Custom software can be built to be scalable, meaning it can grow with your business. This means you don't have to worry about outgrowing your software and having to invest in new systems. As your business expands, your software can expand with it.\r\n\r\nCost-Effective: While custom software development may seem expensive upfront, it can actually be more cost-effective in the long run. By automating tasks and improving efficiency, you can save money on labor costs. Additionally, custom software can reduce the need for expensive hardware and third-party software.\r\n\r\nCompetitive Advantage: By investing in custom software, you can gain a competitive advantage in your industry. You can create unique features that set you apart from your competitors and improve your overall performance. This can help you attract new customers and retain existing ones.\r\n\r\nImproved Collaboration: Custom software can help improve collaboration within your organization. This can include features like real-time communication, project management tools, and shared calendars. By improving collaboration, you can improve productivity and streamline workflows.\r\n\r\nBetter Decision Making: Custom software can provide you with valuable insights that can help you make better business decisions. This can include data analytics, predictive modeling, and real-time reporting. By making better decisions, you can improve your bottom line and stay ahead of the competition.\r\n\r\n* Flexibility: Custom software can be built to meet your specific needs and requirements. This means you don't have to compromise on functionality or features. With custom software, you can build a system that works for your business, rather than having to adapt to off-the-shelf software.",
+      "quote": "#Redefining the landscape of digital services",
+      "slug": "software-dev"
+    }
+  },
+  {
+    "model": "taggit.tag",
+    "pk": 1,
+    "fields": {
+      "name": "design",
+      "slug": "design"
+    }
+  },
+  {
+    "model": "taggit.tag",
+    "pk": 2,
+    "fields": {
+      "name": "branding",
+      "slug": "branding"
+    }
+  },
+  {
+    "model": "taggit.tag",
+    "pk": 3,
+    "fields": {
+      "name": "software development",
+      "slug": "software-development"
+    }
+  },
+  {
+    "model": "taggit.tag",
+    "pk": 4,
+    "fields": {
+      "name": "web development",
+      "slug": "web-development"
+    }
+  },
+  {
+    "model": "taggit.taggeditem",
+    "pk": 1,
+    "fields": {
+      "tag": [
+        "design"
+      ],
+      "content_type": [
+        "website",
+        "project"
+      ],
+      "object_id": 1
+    }
+  },
+  {
+    "model": "taggit.taggeditem",
+    "pk": 2,
+    "fields": {
+      "tag": [
+        "branding"
+      ],
+      "content_type": [
+        "website",
+        "project"
+      ],
+      "object_id": 1
+    }
+  },
+  {
+    "model": "taggit.taggeditem",
+    "pk": 3,
+    "fields": {
+      "tag": [
+        "software development"
+      ],
+      "content_type": [
+        "website",
+        "blog"
+      ],
+      "object_id": 1
+    }
+  },
+  {
+    "model": "taggit.taggeditem",
+    "pk": 4,
+    "fields": {
+      "tag": [
+        "web development"
+      ],
+      "content_type": [
+        "website",
+        "blog"
+      ],
+      "object_id": 1
+    }
+  }
+]

@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+
+# Environment / secrets
+.env
+
+# Local database
+/db.sqlite3
+*.sqlite3
+
+# Generated static files (run collectstatic on the server)
+/staticfiles/
+
+# User uploads (admin image uploads live on the server, not in git)
+/media/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Passenger / cPanel
+/tmp/
+*.log
