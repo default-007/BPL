@@ -56,6 +56,25 @@ class PageTests(TestCase):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, escape(str(obj)))
 
+    def test_no_relative_asset_paths(self):
+        # Relative paths like "assets/..." or "../static/..." break on nested
+        # URLs such as /service/<slug>/, so assets must use {% static %}.
+        pages = [reverse(f"website:{name}") for name in ["home", "about", "service", "project", "blog"]]
+        pages += [Service.objects.first().get_absolute_url(), self.project.get_absolute_url(), self.blog.get_absolute_url()]
+        for url in pages:
+            with self.subTest(url=url):
+                html = self.client.get(url).content.decode()
+                self.assertNotIn("../static/", html)
+                self.assertNotIn("url('static/", html)
+                self.assertNotIn('href="assets/', html)
+                self.assertNotIn('data-src="assets/', html)
+                self.assertNotIn('href="blog/"', html)
+                self.assertIn('/static/assets/images/favicon-32x32.png"', html)
+
+    def test_favicon_ico_redirects_to_static_file(self):
+        response = self.client.get("/favicon.ico")
+        self.assertRedirects(response, "/static/favicon.ico", fetch_redirect_response=False)
+
     def test_unknown_slug_is_404(self):
         response = self.client.get(reverse("website:service_detail", args=["nope"]))
         self.assertEqual(response.status_code, 404)

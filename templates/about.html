@@ -11,7 +11,7 @@
 
   <div class="pr__wrapper" id="site-wrapper">
 
-    <div class="pr__hero__wrap pr__dark" style="background-image: url('../static/assets/images/hero_03.jpg');"
+    <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
       data-uk-parallax="bgy: -200" id="site-hero">
 
       {% include 'partials/header.html' %}
@@ -102,7 +102,7 @@
                                     <div class="item about-box has-image">
                                       <div class="outer">
                                         <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="assets/images/about_01.jpg" data-uk-img=""></div>
+                                          data-src="{% static 'assets/images/about_01.jpg' %}" data-uk-img=""></div>
                                         <div class="inner">
                                           <h3 class="title uk-h5">Who we are</h3>
                                           <hr class="line pr__hr__secondary">
@@ -115,7 +115,7 @@
                                     <div class="item about-box has-image">
                                       <div class="outer">
                                         <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="assets/images/about_02.jpg" data-uk-img=""></div>
+                                          data-src="{% static 'assets/images/about_02.jpg' %}" data-uk-img=""></div>
                                         <div class="inner">
                                           <h3 class="title uk-h5">What we do</h3>
                                           <hr class="line pr__hr__secondary">
@@ -128,7 +128,7 @@
                                     <div class="item about-box has-image">
                                       <div class="outer">
                                         <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="assets/images/about_03.jpg" data-uk-img=""></div>
+                                          data-src="{% static 'assets/images/about_03.jpg' %}" data-uk-img=""></div>
                                         <div class="inner">
                                           <h3 class="title uk-h5">Our Philosophy</h3>
                                           <hr class="line pr__hr__secondary">

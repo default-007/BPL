@@ -5,11 +5,11 @@
 
     <nav class="menu" data-uk-scrollspy-nav="offset: 0; closest: li; scroll: true">
       <ul data-uk-scrollspy="target: > li; cls:uk-animation-slide-right; delay: 100; repeat: true;">
-        <li><a href="#pr__hero">Home</a></li>
-        <li><a href="#pr__services">Services</a></li>
-        <li><a href="#pr__works">Works</a></li>
-        <li><a href="#pr__about">About</a></li>
-        <li><a href="blog/">Blog</a></li>
+        <li><a href="{% url 'website:home' %}">Home</a></li>
+        <li><a href="{% url 'website:about' %}">About</a></li>
+        <li><a href="{% url 'website:service' %}">Services</a></li>
+        <li><a href="{% url 'website:project' %}">Projects</a></li>
+        <li><a href="{% url 'website:blog' %}">Blog</a></li>
         <li><a id="pr__contact" href="#pr__contact__form" data-uk-toggle="">Contact</a></li>
       </ul>
     </nav>
