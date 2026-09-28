@@ -275,3 +275,89 @@ class EnquiryAdminTests(TestCase):
         self.client.login(username="admin", password="password123")
         response = self.client.get(reverse("admin:website_enquiry_changelist"))
         self.assertEqual(response.status_code, 200)
+
+
+@override_settings(
+    CONTACT_EMAIL="info@bakpagelabs.com",
+    DEFAULT_FROM_EMAIL="website@bakpagelabs.com",
+    CONTACT_RATE_LIMIT=5,
+    STORAGES=TEST_STORAGES,
+)
+class QuoteViewTests(TestCase):
+    url = reverse("website:quote")
+    ajax = {"HTTP_X_REQUESTED_WITH": "XMLHttpRequest"}
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.service = Service.objects.create(name="AI & automation", slug="ai-automation", price_from=85)
+
+    def setUp(self):
+        cache.clear()
+
+    def data(self, **overrides):
+        base = {
+            "name": "Jane Wanjiku",
+            "business": "Jane's Shop",
+            "email": "jane@example.com",
+            "phone": "0700000000",
+            "message": "Need an MVP for my shop.",
+            "service": self.service.pk,
+            "scope_kind": "ai-automation",
+            "scope_size": "Standard",
+            "addons": "Copy & content",
+            "estimate": "KES 90k – 130k",
+            "preferred_slot": "Tue 10:00",
+            "source": "quote",
+        }
+        base.update(overrides)
+        return base
+
+    def test_get_renders_calculator_context(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "ai-automation")
+
+    def test_get_with_service_query_param_preselects_it(self):
+        response = self.client.get(self.url, {"service": "ai-automation"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-bp-preselect="ai-automation"')
+
+    def test_ajax_submit_saves_and_emails(self):
+        response = self.client.post(self.url, self.data(), **self.ajax)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["ok"])
+        self.assertEqual(Enquiry.objects.count(), 1)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["info@bakpagelabs.com"])
+
+    def test_calculator_fields_optional_when_js_did_not_run(self):
+        response = self.client.post(
+            self.url,
+            self.data(service="", scope_kind="", scope_size="", addons="", estimate="", preferred_slot=""),
+            **self.ajax,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["ok"])
+        self.assertEqual(Enquiry.objects.count(), 1)
+
+    def test_invalid_submission_returns_errors(self):
+        response = self.client.post(self.url, self.data(email="not-an-email"), **self.ajax)
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("email", response.json()["errors"])
+        self.assertEqual(Enquiry.objects.count(), 0)
+
+    def test_rate_limited_per_ip(self):
+        for _ in range(5):
+            self.assertEqual(self.client.post(self.url, self.data(), **self.ajax).status_code, 200)
+        response = self.client.post(self.url, self.data(), **self.ajax)
+        self.assertEqual(response.status_code, 429)
+        self.assertEqual(Enquiry.objects.count(), 5)
+
+    def test_csrf_required(self):
+        client = self.client_class(enforce_csrf_checks=True)
+        self.assertEqual(client.post(self.url, self.data()).status_code, 403)
+
+    def test_non_ajax_submit_renders_confirmation(self):
+        response = self.client.post(self.url, self.data())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "we've got it")
