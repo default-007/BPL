@@ -847,7 +847,7 @@ class QuoteViewTests(TestCase):
     def test_non_ajax_submit_renders_confirmation(self):
         response = self.client.post(self.url, self.data())
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "we&#x27;ve got it")
+        self.assertContains(response, "we've got it")
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
