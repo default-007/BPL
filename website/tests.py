@@ -6,7 +6,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.html import escape
 
-from .models import Blog, Category, ContactMessage, Project, Service
+from .models import Blog, Category, ContactMessage, Enquiry, Project, Service
 
 
 # Plain static storage so tests don't need collectstatic's manifest.
@@ -167,3 +167,43 @@ class ContactFormTests(TestCase):
     def test_csrf_required(self):
         client = self.client_class(enforce_csrf_checks=True)
         self.assertEqual(client.post(self.url, self.data).status_code, 403)
+
+
+@override_settings(STORAGES=TEST_STORAGES)
+class RedesignModelTests(TestCase):
+    def test_service_has_pricing_fields_with_sane_defaults(self):
+        service = Service.objects.create(name="Test service", slug="test-service")
+        self.assertEqual(service.price_from, 0)
+        self.assertEqual(service.addon_factor, 1.0)
+        self.assertFalse(service.is_retainer)
+        self.assertEqual(service.short_name, "")
+        self.assertEqual(service.highlights, "")
+
+    def test_project_has_case_study_fields_with_sane_defaults(self):
+        category = Category.objects.create(name="Branding")
+        project = Project.objects.create(
+            name="Test project", image="test.png", description="x",
+            category=category, slug="test-project",
+        )
+        self.assertEqual(project.headline, "")
+        self.assertEqual(project.metrics, "")
+        self.assertEqual(project.metrics_list, [])
+
+    def test_project_metrics_list_parses_value_and_label(self):
+        category = Category.objects.create(name="Branding")
+        project = Project.objects.create(
+            name="Test project", image="test.png", description="x",
+            category=category, slug="test-project-2",
+            metrics="3.1×|Case intake per month\n40%|Faster onboarding",
+        )
+        self.assertEqual(
+            project.metrics_list,
+            [("3.1×", "Case intake per month"), ("40%", "Faster onboarding")],
+        )
+
+    def test_enquiry_can_be_created_with_only_required_fields(self):
+        enquiry = Enquiry.objects.create(email="lead@example.com", message="Hello")
+        self.assertEqual(enquiry.source, "quote")
+        self.assertFalse(enquiry.handled)
+        self.assertIsNone(enquiry.service)
+        self.assertEqual(str(enquiry), "lead@example.com (Quote flow)")
