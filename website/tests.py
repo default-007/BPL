@@ -6,6 +6,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.html import escape
 
+from .forms import ContactForm, EnquiryForm
 from .models import Blog, Category, ContactMessage, Enquiry, Project, Service
 
 
@@ -217,3 +218,50 @@ class RedesignModelTests(TestCase):
         self.assertFalse(enquiry.handled)
         self.assertIsNone(enquiry.service)
         self.assertEqual(str(enquiry), "lead@example.com (Quote flow)")
+
+
+@override_settings(STORAGES=TEST_STORAGES)
+class EnquiryFormTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.service = Service.objects.create(name="AI & automation", slug="ai-automation")
+
+    def valid_data(self, **overrides):
+        data = {
+            "name": "Jane Wanjiku",
+            "business": "Jane's Shop",
+            "email": "jane@example.com",
+            "phone": "0700000000",
+            "message": "Need an MVP for my shop.",
+            "service": self.service.pk,
+            "scope_kind": "ai-automation",
+            "scope_size": "Standard",
+            "addons": "Copy & content",
+            "estimate": "KES 90k – 130k",
+            "preferred_slot": "Tue 10:00",
+            "source": "quote",
+        }
+        data.update(overrides)
+        return data
+
+    def test_valid_data_creates_enquiry(self):
+        form = EnquiryForm(data=self.valid_data())
+        self.assertTrue(form.is_valid(), form.errors)
+        enquiry = form.save()
+        self.assertEqual(enquiry.service, self.service)
+
+    def test_message_is_required(self):
+        form = EnquiryForm(data=self.valid_data(message=""))
+        self.assertFalse(form.is_valid())
+        self.assertIn("message", form.errors)
+
+    def test_calculator_fields_are_optional(self):
+        form = EnquiryForm(data=self.valid_data(
+            service="", scope_kind="", scope_size="", addons="", estimate="", preferred_slot="",
+        ))
+        self.assertTrue(form.is_valid(), form.errors)
+
+    def test_non_hidden_fields_get_bp_field_class(self):
+        form = EnquiryForm()
+        self.assertEqual(form.fields["name"].widget.attrs["class"], "bp-field")
+        self.assertNotIn("class", form.fields["service"].widget.attrs)
