@@ -1,0 +1,45 @@
+{% load l10n %}
+{% localize off %}
+<div class="bp-calc" data-bp-calc{% if preselect %} data-bp-preselect="{{ preselect }}"{% endif %}>
+  <div class="bp-calc__picker">
+    <span class="bp-label">1 · What are we building?</span>
+    <div class="bp-chip-row">
+      {% for service in quote_services %}
+      <button type="button" class="bp-chip" data-bp-kind data-value="{{ service.slug }}" data-label="{{ service.label }}"
+        data-base="{{ service.price_from }}" data-factor="{{ service.addon_factor }}"
+        data-retainer="{{ service.is_retainer|yesno:'true,false' }}" aria-pressed="false">{{ service.label }}</button>
+      {% endfor %}
+    </div>
+    <span class="bp-label">2 · How big is it?</span>
+    <div class="bp-chip-row">
+      {% for size in scope_sizes %}
+      <button type="button" class="bp-chip" data-bp-size data-label="{{ size.label }}" data-mult="{{ size.mult }}"
+        data-weeks="{{ size.weeks }}" aria-pressed="false">{{ size.label }} · {{ size.weeks }}</button>
+      {% endfor %}
+    </div>
+    <span class="bp-label">3 · Add-ons</span>
+    <div class="bp-chip-row">
+      {% for addon in quote_addons %}
+      <button type="button" class="bp-chip" data-bp-addon data-label="{{ addon.label }}" data-add="{{ addon.add }}"
+        {% if addon.default %}data-bp-default{% endif %} aria-pressed="false">{{ addon.label }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="bp-calc__result">
+    <span class="bp-label">Indicative range</span>
+    <div class="bp-calc__figure" data-bp-estimate>On enquiry</div>
+    <div class="bp-calc__timeline" data-bp-timeline></div>
+    <div class="bp-calc__divider"></div>
+    <p class="bp-calc__note" data-bp-note></p>
+    <input type="hidden" name="scope_kind" data-bp-input-kind>
+    <input type="hidden" name="scope_size" data-bp-input-size>
+    <input type="hidden" name="addons" data-bp-input-addons>
+    <input type="hidden" name="estimate" data-bp-input-estimate>
+    {% if not is_embedded_in_quote_form %}
+    <a href="{% url 'website:quote' %}{% if preselect %}?service={{ preselect }}{% endif %}" class="bp-btn bp-btn--primary bp-btn--block">Lock this scope in a call</a>
+    {% endif %}
+    <p class="bp-fineprint">Ranges are indicative and can be phased or paid monthly. Final quote follows a 30-minute
+      scoping call — free, no deck required.</p>
+  </div>
+</div>
+{% endlocalize %}
