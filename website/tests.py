@@ -95,6 +95,11 @@ class PageTests(TestCase):
         self.assertEqual(self.project.image1URL, "")
         self.assertEqual(Service.objects.first().imageURL, "")
 
+    def test_nav_links_to_quote_page(self):
+        response = self.client.get(reverse("website:home"))
+        self.assertContains(response, reverse("website:quote"))
+        self.assertContains(response, "Get a quote")
+
 
 @override_settings(
     CONTACT_EMAIL="info@bakpagelabs.com",
