@@ -3,42 +3,38 @@
 <html lang="en">
 
 <head>
-  <title>BakPage Labs</title>
+  <title>{% block title %}BakPage Labs{% endblock %}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="msapplication-TileColor" content="#E9204F">
-  <meta name="theme-color" content="#E9204F">
+  <meta name="theme-color" content="#0c0c0d">
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/apple-touch-icon.png' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon-32x32.png' %}">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon-16x16.png' %}">
   <link rel="icon" href="{% static 'favicon.ico' %}" sizes="any">
   <script data-ad-client="ca-pub-8128509305831596" async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <link rel="stylesheet" href="{% static 'assets/css/normalize.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/pr.animation.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/uikit.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/pixeicons.css' %}" />
-  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/redesign.css' %}">
 </head>
 
-<body>
+<body class="bp bp-body-pad">
   {% include 'partials/messages.html' %}
-  <!-- Content Row -->
-  {% block content %}
+  {% include 'partials/header.html' %}
+  {% include 'partials/mobile-nav.html' %}
 
+  {% block content %}
   {% endblock %}
 
-  <!-- Needed Scripts -->
+  {% include 'partials/footer.html' %}
+  {% block cta_bar %}{% include 'partials/cta-bar.html' %}{% endblock %}
 
-  <script src="{% static 'assets/js/jquery.min.js'%}"></script>
-  <script src="{% static 'assets/js/anime.min.js'%}"></script>
-  <script src="{% static 'assets/js/pr.animation.js'%}"></script>
-  <script src="{% static 'assets/js/uikit.min.js'%}"></script>
-  <script src="{% static 'assets/js/owl.carousel.min.js'%}"></script>
-  <script src="{% static 'assets/js/validate.js'%}"></script>
-  <script src="{% static 'assets/js/main.js'%}"></script>
+  <script src="{% static 'assets/js/redesign.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="{% static 'assets/js/motion.js' %}"></script>
+  {% block hero_scene_script %}{% endblock %}
 </body>
 
 </html>
