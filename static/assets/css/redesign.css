@@ -1761,3 +1761,10 @@ textarea.bp-field {
 		padding-bottom: 140px;
 	}
 }
+
+.bp-hero__scene {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
