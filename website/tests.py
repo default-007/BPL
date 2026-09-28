@@ -43,6 +43,16 @@ class PageTests(TestCase):
         self.assertEqual(Service.objects.count(), 6)
         self.assertEqual(Service.objects.first().slug, "ai-automation")
 
+    def test_service_pricing_seeded_by_migration(self):
+        service = Service.objects.get(slug="ai-automation")
+        self.assertEqual(service.price_from, 85)
+        self.assertEqual(service.short_name, "AI & automation")
+        self.assertIn("WhatsApp & chat agents", service.highlights)
+
+        advisory = Service.objects.get(slug="tech-advisory")
+        self.assertTrue(advisory.is_retainer)
+        self.assertEqual(advisory.price_from, 45)
+
     def test_list_pages(self):
         for name in ["home", "about", "service", "project", "blog"]:
             with self.subTest(page=name):
