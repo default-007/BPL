@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
@@ -265,3 +266,12 @@ class EnquiryFormTests(TestCase):
         form = EnquiryForm()
         self.assertEqual(form.fields["name"].widget.attrs["class"], "bp-field")
         self.assertNotIn("class", form.fields["service"].widget.attrs)
+
+
+class EnquiryAdminTests(TestCase):
+    def test_enquiry_admin_changelist_loads(self):
+        User = get_user_model()
+        User.objects.create_superuser("admin", "admin@example.com", "password123")
+        self.client.login(username="admin", password="password123")
+        response = self.client.get(reverse("admin:website_enquiry_changelist"))
+        self.assertEqual(response.status_code, 200)
