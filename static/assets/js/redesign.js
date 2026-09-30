@@ -158,6 +158,23 @@
 						})
 						.join(", ");
 				}
+
+				var cta = $("[data-bp-calc-cta]", calc);
+				if (cta) {
+					var params = [];
+					var kindValue = state.kind.getAttribute("data-value");
+					if (kindValue) params.push("service=" + encodeURIComponent(kindValue));
+					if (sizeLabel) params.push("size=" + encodeURIComponent(sizeLabel));
+					if (state.addons.length) {
+						var addonLabels = state.addons.map(function (addon) {
+							return addon.getAttribute("data-label") || "";
+						}).join(",");
+						params.push("addons=" + encodeURIComponent(addonLabels));
+					}
+					if (estimate) params.push("estimate=" + encodeURIComponent(estimate));
+					var baseHref = cta.getAttribute("href").split("?")[0];
+					cta.setAttribute("href", params.length ? baseHref + "?" + params.join("&") : baseHref);
+				}
 			}
 
 			kinds.forEach(function (el) {
@@ -188,6 +205,20 @@
 			if (preselect) {
 				kinds.forEach(function (el) {
 					if (el.getAttribute("data-value") === preselect) state.kind = el;
+				});
+			}
+
+			var preselectSize = calc.getAttribute("data-bp-preselect-size");
+			if (preselectSize) {
+				sizes.forEach(function (el) {
+					if (el.getAttribute("data-label") === preselectSize) state.size = el;
+				});
+			}
+			var preselectAddons = calc.getAttribute("data-bp-preselect-addons");
+			if (preselectAddons) {
+				var wanted = preselectAddons.split(",");
+				state.addons = addons.filter(function (el) {
+					return wanted.indexOf(el.getAttribute("data-label")) !== -1;
 				});
 			}
 

@@ -41,7 +41,7 @@
   {% endif %}
   <form method="post" action="{% url 'website:quote' %}">
     {% csrf_token %}
-    {% include 'partials/quote-calculator.html' with preselect=preselect is_embedded_in_quote_form=True %}
+    {% include 'partials/quote-calculator.html' with preselect=preselect preselect_size=preselect_size preselect_addons=preselect_addons is_embedded_in_quote_form=True %}
     <div class="bp-field-grid" style="margin-top: 32px;">
       {{ form.name }}
       {{ form.business }}

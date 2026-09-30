@@ -1,6 +1,6 @@
 {% load l10n %}
 {% localize off %}
-<div class="bp-calc" data-bp-calc{% if preselect %} data-bp-preselect="{{ preselect }}"{% endif %}>
+<div class="bp-calc" data-bp-calc{% if preselect %} data-bp-preselect="{{ preselect }}"{% endif %}{% if preselect_size %} data-bp-preselect-size="{{ preselect_size }}"{% endif %}{% if preselect_addons %} data-bp-preselect-addons="{{ preselect_addons }}"{% endif %}>
   <div class="bp-calc__picker">
     <span class="bp-label">1 · What are we building?</span>
     <div class="bp-chip-row">
@@ -36,7 +36,7 @@
     <input type="hidden" name="addons" data-bp-input-addons>
     <input type="hidden" name="estimate" data-bp-input-estimate>
     {% if not is_embedded_in_quote_form %}
-    <a href="{% url 'website:quote' %}{% if preselect %}?service={{ preselect }}{% endif %}" class="bp-btn bp-btn--primary bp-btn--block">Lock this scope in a call</a>
+    <a href="{% url 'website:quote' %}" class="bp-btn bp-btn--primary bp-btn--block" data-bp-calc-cta>Lock this scope in a call</a>
     {% endif %}
     <p class="bp-fineprint">Ranges are indicative and can be phased or paid monthly. Final quote follows a 30-minute
       scoping call — free, no deck required.</p>
