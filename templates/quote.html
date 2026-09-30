@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Get a quote — BakPage Labs{% endblock %}
+{% block cta_bar %}{% endblock %}
+
+{% block content %}
+<section class="bp-hero bp-hero--page">
+  <div class="bp-hero__scrim bp-hero__scrim--down"></div>
+  <div class="bp-container bp-hero__inner bp-hero__inner--short">
+    <span class="bp-label bp-label--red">Free, no-deck scoping call</span>
+    <h1 class="bp-h1">Let's scope your project.</h1>
+    <p class="bp-lead bp-measure">Pick what you're building below, tell us a bit about your business, and we'll call you at a time that works to confirm the details.</p>
+  </div>
+</section>
+
+<section class="bp-section bp-container">
+  {% if confirmed %}
+  <div class="bp-confirm">
+    <b>Thanks — we've got it.</b>
+    <p>We'll call you at your preferred slot to confirm scope and next steps.</p>
+  </div>
+  <div class="bp-nextsteps">
+    <div>
+      <span class="bp-label">1. We review</span>
+      <a href="{% url 'website:service' %}">See all services</a>
+    </div>
+    <div>
+      <span class="bp-label">2. We call</span>
+      <a href="tel:+25477681091">+254 777 681 091</a>
+    </div>
+    <div>
+      <span class="bp-label">3. We start</span>
+      <a href="{% url 'website:project' %}">See our work</a>
+    </div>
+  </div>
+  {% else %}
+  {% if form.errors %}
+  <ul class="bp-errors">
+    {% for field in form %}{% for error in field.errors %}<li>{{ field.label }}: {{ error }}</li>{% endfor %}{% endfor %}
+    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  <form method="post" action="{% url 'website:quote' %}">
+    {% csrf_token %}
+    {% include 'partials/quote-calculator.html' with preselect=preselect preselect_size=preselect_size preselect_addons=preselect_addons is_embedded_in_quote_form=True %}
+    <div class="bp-field-grid" style="margin-top: 32px;">
+      {{ form.name }}
+      {{ form.business }}
+    </div>
+    <div class="bp-field-grid">
+      {{ form.email }}
+      {{ form.phone }}
+    </div>
+    {{ form.message }}
+    <span class="bp-label" style="margin-top: 24px; display: block;">Preferred call slot</span>
+    <div class="bp-chip-row" data-bp-slots style="margin: 14px 0 28px;">
+      {% for slot in slots %}
+      <button type="button" class="bp-chip" data-bp-slot data-label="{{ slot }}">{{ slot }}</button>
+      {% endfor %}
+    </div>
+    {{ form.preferred_slot }}
+    {{ form.service }}
+    {{ form.source }}
+    <div class="bp-formrow">
+      <button type="submit" class="bp-btn bp-btn--primary">Send enquiry</button>
+    </div>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,31 +1,20 @@
 {% load static %}
-<header class="pr__header pr__dark" data-uk-sticky="top: 100vh; animation: uk-animation-slide-top;">
-  <div class="uk-container">
-    <div class="inner">
-      <div class="logo" style="height: 100px; width: 100px; padding-top: 15px;">
-        <a href="/">
-          <image src="{%static 'assets/logo.png'%}"></image>
-        </a>
-      </div>
-
-      <div class="navbar pr-font-second">
-        <nav class="menu" data-uk-scrollspy-nav="offset: 0; closest: li; scroll: true">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'website:about' %}">About</a></li>
-            <li><a href="{% url 'website:service' %}">Services</a></li>
-            <li><a href="{% url 'website:project' %}">Projects</a></li>
-            <li><a href="{% url 'website:blog' %}">Blog</a></li>
-            <li><a id="pr__contact" href="#pr__contact__form" data-uk-toggle="">Contact</a></li>
-          </ul>
-        </nav>
-
-      </div>
-      <div class="navbar-tigger" data-uk-toggle="target: #navbar-mobile">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+<header class="bp-header">
+  <div class="bp-container bp-header__inner">
+    <a class="bp-logo" href="{% url 'website:home' %}">
+      <img src="{% static 'assets/logo.png' %}" alt="BakPage Labs">
+    </a>
+    <nav class="bp-nav">
+      <a href="{% url 'website:home' %}"{% if request.resolver_match.url_name == 'home' %} class="is-active"{% endif %}>Home</a>
+      <a href="{% url 'website:about' %}"{% if request.resolver_match.url_name == 'about' %} class="is-active"{% endif %}>About</a>
+      <a href="{% url 'website:service' %}"{% if request.resolver_match.url_name == 'service' or request.resolver_match.url_name == 'service_detail' %} class="is-active"{% endif %}>Services</a>
+      <a href="{% url 'website:project' %}"{% if request.resolver_match.url_name == 'project' or request.resolver_match.url_name == 'project_detail' %} class="is-active"{% endif %}>Work</a>
+      <a href="{% url 'website:blog' %}"{% if request.resolver_match.url_name == 'blog' or request.resolver_match.url_name == 'blog_detail' %} class="is-active"{% endif %}>Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="{% url 'website:quote' %}" class="bp-btn bp-btn--primary bp-btn--small">Get a quote</a>
+    </nav>
+    <button type="button" class="bp-burger" data-bp-burger aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span>
+    </button>
   </div>
 </header>

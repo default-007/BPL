@@ -1,265 +1,102 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}About — BakPage Labs{% endblock %}
 {% block content %}
-
-<body class="page-template page-template-default single single-service-item">
-
-  {% include 'partials/loader.html'%}
-
-  {% include 'partials/mobile_nav.html'%}
-  <!-- Mobile Nav End -->
-
-  <div class="pr__wrapper" id="site-wrapper">
-
-    <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
-      data-uk-parallax="bgy: -200" id="site-hero">
-
-      {% include 'partials/header.html' %}
-      <!-- Site Header End -->
-
-      <section class="pr__hero uk-section" id="pr__hero">
-        <div class="uk-container">
-          <div class="section-inner">
-            <div class="hero-content">
-              <hr class="line pr__hr__secondary">
-              <h2 class="page-title  uk-heading-primary">About</h2>
-              <ul class="breadcrumbs uk-breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li><span>About Us</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section><!-- Site Hero End -->
-
-    </div><!-- Hero Wrap End -->
-
-    <div class="pr__content" id="site-content">
-
-      <div class="pr__primary uk-section uk-section-large has-sidebar" id="site-primary">
-        <div class="outer">
-          <div class="uk-container uk-position-relative">
-            <div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
-              <div class="uk-width-expand">
-                <main class="pr__main" id="site-main">
-                  <article class="uk-article page type-page">
-
-                    <div class="outer">
-                      <div class="inner">
-                        <div class="entry-body">
-
-                          <h5 id="slideshow" class="uk-heading-line uk-h4"><span>About Us</span></h5>
-                          <div class="uk-position-relative uk-visible-toggle uk-light"
-                            data-uk-slideshow="animation: push">
-                            <ul class="uk-slideshow-items">
-                              <li>
-                                <div class="image pr__image__cover" data-src="{% static 'assets/images/about_01.jpg'%}"
-                                  data-uk-img=""></div>
-                              </li>
-                              <li>
-                                <div class="image pr__image__cover" data-src="{% static 'assets/images/about_02.jpg'%}"
-                                  css'%}" data-uk-img=""></div>
-                              </li>
-                              <li>
-                                <div class="image pr__image__cover" data-src="{% static 'assets/images/about_03.jpg'%}"
-                                  data-uk-img=""></div>
-                              </li>
-                            </ul>
-                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                              data-uk-slidenav-previous="" data-uk-slideshow-item="previous"></a>
-                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#"
-                              data-uk-slidenav-next="" data-uk-slideshow-item="next"></a>
-                          </div>
-                          <section class="pr__about pr__section uk-section uk-section-large p-3">
-                            <div class="section-outer">
-                              <div class="section-heading">
-                                <div class="outer">
-                                  <div class="uk-container">
-                                    <div class="inner uk-grid" data-uk-grid="">
-                                      <div class="left uk-width-expand">
-                                        <hr class="line pr__hr__secondary">
-                                        <h2 class="title uk-h1">About.</h2>
-                                        <span class="subtitle pr__heading__secondary">We're more than a digital
-                                          agency</span>
-                                      </div>
-                                      <div class="right uk-width-3-5@s">
-                                        <p>Our team of creative and technical professionals have extensive
-                                          experience developing marketing solutions to help you communicate more
-                                          effectively with potential customers, current customers and employees. We do
-                                          this through clear communication and thoughtful technology solutions.</p>
-
-                                        <p>We can take on 100% of a project or work with your team on specific tasks to
-                                          get you the results you need.</p>
-                                      </div>
-                                    </div>
-                                  </div><!-- Container End -->
-                                </div><!-- Outer End -->
-                              </div><!-- Heading End -->
-                              <div class="section-inner">
-                                <div class="uk-container">
-                                  <div class="about-boxes uk-child-width-1-3@s uk-grid uk-grid-match uk-grid-small"
-                                    data-uk-grid="">
-                                    <div class="item about-box has-image">
-                                      <div class="outer">
-                                        <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="{% static 'assets/images/about_01.jpg' %}" data-uk-img=""></div>
-                                        <div class="inner">
-                                          <h3 class="title uk-h5">Who we are</h3>
-                                          <hr class="line pr__hr__secondary">
-                                          <p class="description">We are an experienced marketing, communications,
-                                            graphics design and web
-                                            development company located in Nairobi, KE with clients across Kenya. </p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="item about-box has-image">
-                                      <div class="outer">
-                                        <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="{% static 'assets/images/about_02.jpg' %}" data-uk-img=""></div>
-                                        <div class="inner">
-                                          <h3 class="title uk-h5">What we do</h3>
-                                          <hr class="line pr__hr__secondary">
-                                          <p class="description">Our focus is to help you increase brand awareness and
-                                            make your business more efficient and more profitable, by helping you create
-                                            your own unique identity.</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="item about-box has-image">
-                                      <div class="outer">
-                                        <div class="image pr__image__cover pr__ratio__portrait"
-                                          data-src="{% static 'assets/images/about_03.jpg' %}" data-uk-img=""></div>
-                                        <div class="inner">
-                                          <h3 class="title uk-h5">Our Philosophy</h3>
-                                          <hr class="line pr__hr__secondary">
-                                          <p class="description">Capitalize on low hanging fruit to identify a
-                                            ballpark value added activity to beta test. Override the digital divide
-                                            with additional clickthroughs from DevOps.</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div><!-- Container End -->
-                              </div><!-- Inner End -->
-                            </div><!-- Outer End -->
-                          </section>
-                          <hr class="pr__vr__section">
-                          <!-- 
-                          <h5 id="accordions" class="uk-heading-line uk-h4"><span>Our Strategies</span></h5>
-                          <ul data-uk-accordion="">
-                            <li class="uk-open">
-                              <a class="uk-accordion-title" href="#">Development Strategy</a>
-                              <div class="uk-accordion-content">
-
-                              </div>
-                            </li>
-                            <li>
-                              <a class="uk-accordion-title" href="#">Digital Strategy</a>
-                              <div class="uk-accordion-content">
-                                <p>Globally incubate standards compliant channels before scalable benefits. Quickly
-                                  disseminate superior deliverables
-                                  whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change
-                                  before vertical
-                                  architectures.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <a class="uk-accordion-title" href="#">Marketing Strategy</a>
-                              <div class="uk-accordion-content">
-                                <p>Dynamically target high-payoff intellectual capital for customized technologies.
-                                  Objectively integrate emerging core
-                                  competencies before process-centric communities. Dramatically evisculate holistic
-                                  innovation rather than
-                                  client-centric data.</p>
-                              </div>
-                            </li>
-                          </ul>
-                          <br> -->
-                          <h5 id="tabs" class="uk-heading-line uk-h4"><span>Our Strategies.</span></h5>
-                          <ul class="uk-subnav uk-subnav-divider"
-                            data-uk-switcher="animation: uk-animation-slide-top-small">
-                            <li><a href="#">Development Strategy</a></li>
-                            <li><a href="#">Graphic design Strategy</a></li>
-                            <li><a href="#">Digital Marketing Strategy</a></li>
-                          </ul>
-                          <ul class="uk-switcher uk-margin">
-                            <li>
-                              <h6>Do you have clearly defined requirements for your future application?
-                              </h6>
-                              <p>We incoporate both linear and evolutionary development model depending weather your
-                                requirements for the software is going to change in the future.</p>
-                              <h6>Choose the right technology platform
-                              </h6>
-                              <p>Selecting a technology platform (it includes not only the language but also
-                                frameworks, patterns, APIs, and more) is important as the difference in the speed of
-                                development may be 2 – 20 times.</p>
-                              <h6>Apply automation
-                              </h6>
-                              <p>Use of automation in development, testing and deployment. Containerization, Test
-                                Automation and DevOps </p>
-                              <h6>Develop Iteratively
-                              </h6>
-                              <p>We start with a minimum viable product (MVP) or a first basic version of an enterprise
-                                application. This will allow having a working solution with must-have functions that
-                                brings value and adding other functions gradually, taking into account users’ feedback.
-                              </p>
-                            </li>
-                            <li>
-                              <h6>Create A Superb Brand Identity</h6>
-                              <p>Our designers implement several design components to put across a brand message that
-                                helps to develop a great brand identity. For instance, a unique logo design with the
-                                great use of colors, font, etc will stir up some projected feelings. These feelings will
-                                show a message of the business for the target audiences.</p>
-                              <h6>Fortify Your Business’s Position</h6>
-                              <p>you should design an eye-catching website design that involves all the significant
-                                information about your business. The website also offers up-to-date information about
-                                innovative growth occurrence in your company.</p>
-                              <h6>Put Your Business Distant From Competitors</h6>
-                              <p>You will draw attention to salient features of your products or services in your
-                                marketing campaign. design a brochure to give accurate information to your clients. You
-                                must obtain a
-                                brochure design based on a different perception.</p>
-                              <h6>Advertising</h6>
-                            </li>
-                            <li>
-                              <h6></h6>
-                            </li>
-                          </ul>
-                          <br>
-
-                        </div>
-                      </div>
-                    </div>
-
-                  </article>
-                </main>
-              </div>
-              <div class="uk-width-1-4@l">
-                <aside class="pr-sidebar widget-area" id="site-sidebar">
-                  <div style="z-index: 1;" data-uk-sticky="offset: 150; bottom: true">
-                    <section class="widget widget_nav_menu">
-                      <h2 class="widget-title">Core Services</h2>
-                      <ul class="content" data-uk-scrollspy-nav="closest: li; scroll: true; offset: 150">
-                        {% for service in services %}
-                        <li><a href="{{service.get_absolute_url}}">{{service.name}}</a></li>
-                        {% endfor %}
-                      </ul>
-                    </section>
-                  </div>
-                </aside>
-              </div>
-            </div>
-          </div>
+<section class="bp-hero bp-hero--page">
+  <div class="bp-hero__scrim bp-hero__scrim--down"></div>
+  <div class="bp-container bp-hero__inner bp-hero__inner--short">
+    <span class="bp-label bp-label--red">About us</span>
+    <h1 class="bp-h1">We're more than a digital agency.</h1>
+  </div>
+</section>
+<section class="bp-section bp-container">
+  <div class="bp-split">
+    <div>
+      <span class="bp-rule"></span>
+      <h2 class="bp-h2">Who we are.</h2>
+    </div>
+    <div class="bp-prose">
+      <p>Our team of creative and technical professionals have extensive experience developing marketing solutions to help you communicate more effectively with potential customers, current customers and employees. We do this through clear communication and thoughtful technology solutions.</p>
+      <p>We can take on 100% of a project or work with your team on specific tasks to get you the results you need.</p>
+    </div>
+  </div>
+</section>
+<section class="bp-section bp-container">
+  <div class="bp-grid bp-grid--3">
+    <div class="bp-studio-card">
+      <div class="bp-studio-card__img" style="background-image: url('{% static 'assets/images/about_01.jpg' %}');"></div>
+      <div class="bp-studio-card__body">
+        <h3>Who we are</h3>
+        <p>We are an experienced marketing, communications, graphics design and web development company located in Nairobi, KE with clients across Kenya.</p>
+      </div>
+    </div>
+    <div class="bp-studio-card">
+      <div class="bp-studio-card__img" style="background-image: url('{% static 'assets/images/about_02.jpg' %}');"></div>
+      <div class="bp-studio-card__body">
+        <h3>What we do</h3>
+        <p>Our focus is to help you increase brand awareness and make your business more efficient and more profitable, by helping you create your own unique identity.</p>
+      </div>
+    </div>
+    <div class="bp-studio-card">
+      <div class="bp-studio-card__img" style="background-image: url('{% static 'assets/images/about_03.jpg' %}');"></div>
+      <div class="bp-studio-card__body">
+        <h3>Our philosophy</h3>
+        <p>Working software over decks. We'd rather ship something you can click through in week two than present a roadmap in month three.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bp-section bp-container">
+  <div class="bp-heading-row">
+    <div><span class="bp-rule"></span><h2 class="bp-h2">Our strategies.</h2></div>
+  </div>
+  <div class="bp-accordion">
+    <details class="bp-accordion__item" open>
+      <summary class="bp-accordion__summary">
+        <span class="bp-accordion__num">01</span>
+        <span class="bp-accordion__title"><b>Development strategy</b></span>
+        <span class="bp-accordion__sign"></span>
+      </summary>
+      <div class="bp-accordion__body" style="grid-template-columns: 1fr;">
+        <div class="bp-prose">
+          <h3>Do you have clearly defined requirements for your future application?</h3>
+          <p>We incorporate both linear and evolutionary development models depending on whether your requirements are going to change in the future.</p>
+          <h3>Choose the right technology platform</h3>
+          <p>Selecting a technology platform (language, frameworks, patterns, APIs and more) is important, as the difference in development speed can be 2–20×.</p>
+          <h3>Apply automation</h3>
+          <p>Automation in development, testing and deployment — containerisation, test automation and DevOps.</p>
+          <h3>Develop iteratively</h3>
+          <p>We start with an MVP or a first basic version, giving you a working solution with must-have functions early, adding more as we go based on user feedback.</p>
         </div>
       </div>
-
-    </div><!-- Site Content End -->
-
-    {% include 'partials/footer.html'%}
-    <!-- Site Footer End-->
-
-  </div><!-- Site Wrapper End -->
-
-
-</body>
+    </details>
+    <details class="bp-accordion__item">
+      <summary class="bp-accordion__summary">
+        <span class="bp-accordion__num">02</span>
+        <span class="bp-accordion__title"><b>Design strategy</b></span>
+        <span class="bp-accordion__sign"></span>
+      </summary>
+      <div class="bp-accordion__body" style="grid-template-columns: 1fr;">
+        <div class="bp-prose">
+          <h3>Create a superb brand identity</h3>
+          <p>Our designers put across a brand message that helps develop a great identity — a unique logo, colour and typography that stir the right feelings for your target audience.</p>
+          <h3>Fortify your business's position</h3>
+          <p>An eye-catching design that involves all the significant information about your business, kept up to date as the business grows.</p>
+          <h3>Put your business distant from competitors</h3>
+          <p>We draw attention to the salient features of your products or services, with materials grounded in your actual differentiation.</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+<section class="bp-section bp-container">
+  <div class="bp-heading-row">
+    <div><span class="bp-rule"></span><h2 class="bp-h2">Core services.</h2></div>
+  </div>
+  <div class="bp-grid bp-grid--3">
+    {% for service in services %}
+    <a href="{{ service.get_absolute_url }}" class="bp-link">{{ service.short_name|default:service.name }}</a>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

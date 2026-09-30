@@ -1,10 +1,9 @@
 {% if messages %}
-<div class="pr__messages" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1100; width: min(90%, 600px);">
-  {% for message in messages %}
-  <div class="uk-alert {{ message.tags }}" data-uk-alert="" role="alert">
-    <a class="uk-alert-close" data-uk-close=""></a>
+<div class="bp-messages">
+  <div class="bp-container">
+    {% for message in messages %}
     <p>{{ message }}</p>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 {% endif %}

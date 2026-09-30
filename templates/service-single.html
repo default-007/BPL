@@ -1,104 +1,39 @@
 {% extends 'base.html' %}
-{% load static %}
+{% block title %}{{ object.name }} — BakPage Labs{% endblock %}
 {% block content %}
-
-<body class="page-template page-template-default single single-service-item">
-	{% include 'partials/loader.html'%}
-
-	{% include 'partials/mobile_nav.html'%}
-	<!-- Mobile Nav End -->
-
-	<div class="pr__wrapper" id="site-wrapper">
-		<div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
-			data-uk-parallax="bgy: -200" id="site-hero">
-			{% include 'partials/header.html' %}
-
-			<section class="pr__hero uk-section" id="pr__hero">
-				<div class="uk-container">
-					<div class="section-inner">
-						<div class="hero-content">
-							<hr class="line pr__hr__secondary">
-							<h2 class="page-title uk-heading-primary">{{object.name}}</h2>
-							{% if object.tagline %}
-							<p class="uk-text-lead" style="color: rgba(255,255,255,0.7); margin-top: 15px;">
-								{{object.tagline}}
-							</p>
-							{% endif %}
-							<ul class="breadcrumbs uk-breadcrumb">
-								<li><a href="{% url 'website:service' %}">Services</a></li>
-								<li><span>{{object.name}}</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</section><!-- Site Hero End -->
-
-		</div><!-- Hero Wrap End -->
-
-		<div class="pr__content" id="site-content">
-
-			<div class="pr__primary uk-section uk-section-large has-sidebar" id="site-primary">
-				<div class="outer">
-					<div class="uk-container uk-position-relative">
-						<div class="inner uk-grid uk-grid-large" data-uk-grid="">
-							<div class="uk-width-expand">
-								<main class="pr__main" id="site-main">
-									<article class="uk-article page type-page">
-										<div class="outer">
-											<div class="inner">
-												<div class="entry-body service-detail-content">
-													{% if object.image %}
-													<div class="image pr__image__cover pr__ratio__landscape" data-src="{{object.imageURL}}"
-														data-uk-img="" style="margin-bottom: 40px;">
-													</div>
-													{% endif %}
-													<section>{{object.formatted_markdown|safe }}</section>
-												</div>
-											</div>
-										</div>
-									</article>
-
-									<!-- CTA within service detail -->
-									<div class="uk-margin-large-top uk-padding uk-background-muted" style="border-left: 4px solid #E9204F;">
-										<h3 class="uk-h4 uk-margin-small-bottom">Ready to get started?</h3>
-										<p class="uk-margin-small-bottom">Let's discuss how {{object.name|lower}} can work for your business.</p>
-										<a class="uk-button uk-button-primary" href="#pr__contact__form" data-uk-toggle="">Get in Touch</a>
-									</div>
-								</main>
-							</div>
-							<div class="uk-width-1-4@l">
-								<aside class="pr-sidebar widget-area" id="site-sidebar">
-									<div style="z-index: 1;" data-uk-sticky="offset: 120; bottom: true">
-										<section class="widget widget_nav_menu">
-											<h2 class="widget-title">Our Services</h2>
-											<ul class="content">
-												{% for svc in service_list %}
-												<li{% if svc.slug == object.slug %} class="uk-active"{% endif %}>
-													<a href="{{svc.get_absolute_url}}">{{svc.name}}</a>
-												</li>
-												{% endfor %}
-											</ul>
-										</section>
-
-										<section class="widget uk-margin-large-top">
-											<h2 class="widget-title">Let's Talk</h2>
-											<p>Have a project in mind? We'd love to hear about it.</p>
-											<a class="uk-button uk-button-primary uk-width-1-1" href="#pr__contact__form" data-uk-toggle="">Contact Us</a>
-										</section>
-									</div>
-								</aside>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div><!-- Site Content End -->
-		{% include 'partials/footer.html'%}
-		<!-- Site Footer End-->
-
-	</div><!-- Site Wrapper End -->
-
-
-</body>
+<section class="bp-hero bp-hero--page">
+  <div class="bp-hero__scrim bp-hero__scrim--down"></div>
+  <div class="bp-container bp-hero__inner bp-hero__inner--short">
+    <span class="bp-label bp-label--red">Services</span>
+    <h1 class="bp-h1">{{ object.name }}</h1>
+    {% if object.tagline %}<p class="bp-lead bp-measure">{{ object.tagline }}</p>{% endif %}
+  </div>
+</section>
+<section class="bp-section bp-container bp-service-layout">
+  <div>
+    {% if object.image %}
+    <div class="bp-offset--media" style="margin-bottom: 32px;">
+      <div class="bp-offset__inner"><img src="{{ object.imageURL }}" alt="{{ object.name }}"></div>
+    </div>
+    {% endif %}
+    <div class="bp-prose">
+      {{ object.formatted_markdown|safe }}
+    </div>
+  </div>
+  <aside>
+    <div class="bp-panel">
+      <span class="bp-label">Other services</span>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
+        {% for svc in service_list %}
+        <a href="{{ svc.get_absolute_url }}" class="bp-link"{% if svc.slug == object.slug %} style="color: var(--bp-red);"{% endif %}>{{ svc.short_name|default:svc.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="bp-panel bp-panel--red">
+      <span class="bp-label">Get an estimate</span>
+      <h3 class="bp-h4" style="margin: 10px 0 20px;">See what {{ object.name|lower }} costs.</h3>
+      {% include 'partials/quote-calculator.html' with preselect=object.slug %}
+    </div>
+  </aside>
+</section>
 {% endblock %}
