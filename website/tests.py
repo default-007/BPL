@@ -100,6 +100,16 @@ class PageTests(TestCase):
         self.assertContains(response, reverse("website:quote"))
         self.assertContains(response, "Get a quote")
 
+    def test_home_page_renders_services_and_work(self):
+        response = self.client.get(reverse("website:home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.project.name)
+        self.assertContains(response, "data-bp-calc")
+
+    def test_home_page_loads_hero_scene_script_once(self):
+        response = self.client.get(reverse("website:home"))
+        self.assertContains(response, "hero-scene.js", count=1)
+
 
 @override_settings(
     CONTACT_EMAIL="info@bakpagelabs.com",
