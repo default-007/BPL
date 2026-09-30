@@ -1,94 +1,57 @@
 {% extends 'base.html' %}
-{% load static %}
+{% block title %}Services — BakPage Labs{% endblock %}
 {% block content %}
-
-<body class="page-template page-template-blog-chess single page">
-  {% include 'partials/loader.html'%}
-
-  {% include 'partials/mobile_nav.html'%}
-  <!-- Mobile Nav End -->
-
-  <div class="pr__wrapper" id="site-wrapper">
-    <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
-      data-uk-parallax="bgy: -200" id="site-hero">
-      {% include 'partials/header.html' %}
-
-      <section class="pr__hero uk-section" id="pr__hero">
-        <div class="uk-container">
-          <div class="section-inner">
-            <div class="hero-content uk-grid" data-uk-grid="">
-              <div class="uk-width-2-3@s">
-                <hr class="line pr__hr__secondary">
-                <h2 class="page-title h1">What We Build.</h2>
-                <p class="uk-text-lead" style="color: rgba(255,255,255,0.7); margin-top: 15px;">
-                  AI-powered software, intelligent automation, and strategic tech consulting for businesses ready to operate smarter.
-                </p>
-                <ul class="breadcrumbs uk-breadcrumb">
-                  <li><a href="/">Home</a></li>
-                  <li><span>Services</span></li>
-                </ul>
-              </div>
-            </div>
+<section class="bp-hero bp-hero--page">
+  <div class="bp-hero__scrim bp-hero__scrim--down"></div>
+  <div class="bp-container bp-hero__inner bp-hero__inner--short">
+    <span class="bp-label bp-label--red">What we build</span>
+    <h1 class="bp-h1">AI-powered software, automation, and tech strategy.</h1>
+  </div>
+</section>
+<section class="bp-section bp-container">
+  <div class="bp-accordion">
+    {% for service in object_list %}
+    <details class="bp-accordion__item"{% if forloop.first %} open{% endif %}>
+      <summary class="bp-accordion__summary">
+        <span class="bp-accordion__num">{{ forloop.counter|stringformat:"02d" }}</span>
+        <span class="bp-accordion__title">
+          <b>{{ service.short_name|default:service.name }}</b>
+          <span>{{ service.tagline }}</span>
+        </span>
+        {% if service.price_from %}
+        <span class="bp-accordion__price">From KES {{ service.price_from }}k{% if service.is_retainer %} / mo{% endif %}</span>
+        {% endif %}
+        <span class="bp-accordion__sign"></span>
+      </summary>
+      <div class="bp-accordion__body">
+        <div>
+          <p>{{ service.summary|default:service.description|truncatewords:60 }}</p>
+          {% if service.highlights %}
+          <div class="bp-points">
+            {% for line in service.highlights.splitlines %}
+            {% if line %}<div class="bp-tag">{{ line }}</div>{% endif %}
+            {% endfor %}
           </div>
+          {% endif %}
+          <a href="{{ service.get_absolute_url }}" class="bp-link">See details</a>
         </div>
-      </section><!-- Site Hero End -->
-
-    </div><!-- Hero Wrap End -->
-
-    <div class="pr__content" id="site-content">
-
-      <hr class="pr__vr__section">
-
-      <div class="pr__primary uk-section uk-section-large full-width" id="site-primary">
-        <div class="outer">
-          <div class="uk-container uk-position-relative">
-            <div class="inner">
-              <main class="pr__main" id="site-main">
-                <div class="items-listing services-boxes uk-grid uk-grid-match uk-grid-medium uk-child-width-1-2@s uk-child-width-1-3@m" data-uk-grid="">
-                  {% for service in object_list %}
-                  <div class="item service-box style-two">
-                    <div class="inner">
-                      <i class="overlay-icon icon {{service.icons}}"></i>
-                      <div class="content">
-                        <h5 class="title uk-h5">{{service.name}}</h5>
-                        {% if service.tagline %}
-                        <p class="description">{{service.tagline}}</p>
-                        {% else %}
-                        <p class="description">{{service.description|truncatechars:120}}</p>
-                        {% endif %}
-                        <i class="more icon pr-arrow-right"></i>
-                      </div>
-                      <a href="{{service.get_absolute_url}}" class="link uk-position-cover"></a>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </main>
-            </div>
+        <div class="bp-facts">
+          {% if service.timeline %}
+          <div class="bp-fact bp-fact--red">
+            <span class="bp-label">Timeline</span>
+            <div>{{ service.timeline }}</div>
           </div>
+          {% endif %}
+          {% if service.deliverable %}
+          <div class="bp-fact">
+            <span class="bp-label">You get</span>
+            <div>{{ service.deliverable }}</div>
+          </div>
+          {% endif %}
         </div>
       </div>
-
-      <hr class="pr__vr__section">
-
-      <!-- CTA Section -->
-      <section class="pr__dark uk-section uk-section-large">
-        <div class="uk-container uk-container-small uk-text-center">
-          <hr class="line pr__hr__secondary" style="margin: 0 auto 30px;">
-          <h2 class="uk-h1">Not sure where to start?</h2>
-          <p class="uk-text-lead" style="color: rgba(255,255,255,0.7); max-width: 600px; margin: 20px auto 40px;">
-            Book a free 30-minute consultation. We'll assess your current setup and tell you exactly where technology can make the biggest impact.
-          </p>
-          <a class="uk-button uk-button-large uk-button-primary" href="#pr__contact__form" data-uk-toggle="">Let's Talk</a>
-        </div>
-      </section>
-
-    </div><!-- Site Content End -->
-    {% include 'partials/footer.html'%}
-    <!-- Site Footer End-->
-
-  </div><!-- Site Wrapper End -->
-
-
-</body>
+    </details>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

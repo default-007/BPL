@@ -110,6 +110,17 @@ class PageTests(TestCase):
         response = self.client.get(reverse("website:home"))
         self.assertContains(response, "hero-scene.js", count=1)
 
+    def test_service_list_shows_accordion(self):
+        response = self.client.get(reverse("website:service"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "bp-accordion")
+
+    def test_service_detail_preselects_calculator(self):
+        service = Service.objects.first()
+        response = self.client.get(service.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f'data-bp-preselect="{service.slug}"')
+
 
 @override_settings(
     CONTACT_EMAIL="info@bakpagelabs.com",
