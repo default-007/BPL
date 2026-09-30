@@ -959,6 +959,18 @@ body.bp {
 	padding-top: 72px;
 }
 
+.bp-service-layout {
+	display: grid;
+	grid-template-columns: 1fr 0.5fr;
+	gap: 64px;
+}
+
+.bp-post-layout {
+	display: grid;
+	grid-template-columns: 1fr 0.35fr;
+	gap: 64px;
+}
+
 .bp-tabs {
 	display: flex;
 	gap: 4px;
@@ -1639,7 +1651,9 @@ textarea.bp-field {
 	.bp-case-layout,
 	.bp-split,
 	.bp-testimonial,
-	.bp-accordion__body {
+	.bp-accordion__body,
+	.bp-service-layout,
+	.bp-post-layout {
 		grid-template-columns: 1fr;
 	}
 
