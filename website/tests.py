@@ -61,6 +61,11 @@ class PageTests(TestCase):
                 response = self.client.get(reverse(f"website:{name}"))
                 self.assertEqual(response.status_code, 200)
 
+    def test_about_page_renders(self):
+        response = self.client.get(reverse("website:about"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Who we are")
+
     def test_detail_pages(self):
         for obj in [Service.objects.first(), self.project, self.blog]:
             with self.subTest(obj=obj):
