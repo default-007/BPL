@@ -159,6 +159,17 @@ class PageTests(TestCase):
         self.assertContains(response, "3.1×")
         self.assertContains(response, "Case intake per month")
 
+    def test_blog_list_renders(self):
+        response = self.client.get(reverse("website:blog"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.blog.title)
+
+    def test_blog_detail_renders(self):
+        response = self.client.get(self.blog.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.blog.title)
+        self.assertContains(response, self.blog.author)
+
 
 @override_settings(
     CONTACT_EMAIL="info@bakpagelabs.com",
