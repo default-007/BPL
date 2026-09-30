@@ -270,12 +270,32 @@
 		});
 	}
 
+	/* 6. Preferred call slot picker (quote page)
+	--------------------------------------------------- */
+	function initSlotPicker() {
+		var group = $("[data-bp-slots]");
+		if (!group) return;
+		var chips = $$("[data-bp-slot]", group);
+		var input = document.querySelector("input[name='preferred_slot']");
+		if (!input) return;
+
+		chips.forEach(function (chip) {
+			chip.addEventListener("click", function () {
+				chips.forEach(function (c) {
+					c.classList.toggle("is-active", c === chip);
+				});
+				input.value = chip.getAttribute("data-label");
+			});
+		});
+	}
+
 	function init() {
 		initNav();
 		initTabs();
 		initCalculators();
 		initSteps();
 		initContactForm();
+		initSlotPicker();
 	}
 
 	if (document.readyState === "loading") {
