@@ -202,6 +202,8 @@ class QuoteView(View):
         form = EnquiryForm(initial=initial)
         context = self.build_context(form)
         context["preselect"] = preselect
+        context["preselect_size"] = request.GET.get("size") or None
+        context["preselect_addons"] = request.GET.get("addons") or None
         context["slots"] = pricing.upcoming_slots()
         return render(request, "quote.html", context)
 
@@ -225,7 +227,10 @@ class QuoteView(View):
             context["slots"] = pricing.upcoming_slots()
             return render(request, "quote.html", context, status=429)
 
-        enquiry = form.save()
+        enquiry = form.save(commit=False)
+        if enquiry.scope_kind:
+            enquiry.service = Service.objects.filter(slug=enquiry.scope_kind).first()
+        enquiry.save()
 
         try:
             self.send_notification(enquiry)

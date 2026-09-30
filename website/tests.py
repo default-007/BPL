@@ -436,3 +436,22 @@ class QuoteViewTests(TestCase):
         response = self.client.post(self.url, self.data())
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "we've got it")
+
+    def test_service_fk_derived_from_scope_kind_not_stale_service_field(self):
+        other_service = Service.objects.create(name="Web design", slug="web-design")
+        response = self.client.post(
+            self.url,
+            self.data(service=self.service.pk, scope_kind="web-design"),
+            **self.ajax,
+        )
+        self.assertEqual(response.status_code, 200)
+        enquiry = Enquiry.objects.get()
+        self.assertEqual(enquiry.service, other_service)
+
+    def test_get_with_size_and_addons_query_params_preselects_them(self):
+        response = self.client.get(
+            self.url, {"service": "ai-automation", "size": "Standard", "addons": "Copy & content"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-bp-preselect-size="Standard"')
+        self.assertContains(response, 'data-bp-preselect-addons="Copy &amp; content"')
