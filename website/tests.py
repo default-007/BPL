@@ -121,6 +121,39 @@ class PageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, f'data-bp-preselect="{service.slug}"')
 
+    def test_project_list_renders(self):
+        response = self.client.get(reverse("website:project"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.project.name)
+
+    def test_project_detail_degrades_gracefully_without_case_study_fields(self):
+        # self.project (from setUpTestData) has no headline/summary/metrics/
+        # scope/stack/year set — the case study page must not render empty
+        # labels or dashes for them.
+        response = self.client.get(self.project.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.project.name)  # headline falls back to name
+        content = response.content.decode()
+        self.assertNotIn("Scope</dt>", content)
+        self.assertNotIn("Stack</dt>", content)
+        self.assertNotIn("Year</dt>", content)
+
+    def test_project_detail_shows_case_study_fields_when_present(self):
+        rich_category = Category.objects.create(name="Fintech")
+        rich_project = Project.objects.create(
+            name="Rich Co", image="rich.png", description="desc",
+            category=rich_category, slug="rich-co",
+            headline="Rich Co case study", scope="Platform, brand",
+            stack="Django, Postgres", year="2025",
+            metrics="3.1×|Case intake per month",
+        )
+        response = self.client.get(rich_project.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Rich Co case study")
+        self.assertContains(response, "Platform, brand")
+        self.assertContains(response, "3.1×")
+        self.assertContains(response, "Case intake per month")
+
 
 @override_settings(
     CONTACT_EMAIL="info@bakpagelabs.com",
