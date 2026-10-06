@@ -8,6 +8,7 @@ from .views import (
     HomeView,
     ProjectDetailView,
     ProjectListView,
+    QuoteView,
     ServiceListView,
     ServiceView,
 )
@@ -19,6 +20,7 @@ urlpatterns = [
     # path('l/', LandingPage.as_view(), name='landing'),
     path("about/", AboutView.as_view(), name="about"),
     path("contact/", ContactView.as_view(), name="contact"),
+    path("quote/", QuoteView.as_view(), name="quote"),
     path("blog/", BlogView.as_view(), name="blog"),
     path("blog/<slug:slug>/", BlogDetailView.as_view(), name="blog_detail"),
     path("project/", ProjectListView.as_view(), name="project"),

@@ -9,10 +9,30 @@ from django.shortcuts import redirect, render
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.generic import DetailView, ListView, View
 
-from .forms import ContactForm
+from . import pricing
+from .forms import ContactForm, EnquiryForm
 from .models import Blog, Project, Service
 
 logger = logging.getLogger(__name__)
+
+
+def quote_calculator_context():
+    """Context shared by every template that includes quote-calculator.html."""
+    quote_services = [
+        {
+            "slug": service.slug,
+            "label": service.short_name or service.name,
+            "price_from": service.price_from,
+            "addon_factor": service.addon_factor,
+            "is_retainer": service.is_retainer,
+        }
+        for service in Service.objects.all()
+    ]
+    return {
+        "quote_services": quote_services,
+        "scope_sizes": pricing.SCOPE_SIZES,
+        "quote_addons": pricing.QUOTE_ADDONS,
+    }
 
 
 class HomeView(View):
@@ -22,6 +42,7 @@ class HomeView(View):
         blogs = Blog.objects.all()
         template_name = "home.html"
         context = {'services': services, 'projects': projects, 'blogs': blogs}
+        context.update(quote_calculator_context())
         return render(request, template_name, context)
 
 class LandingPage(View):
@@ -44,6 +65,7 @@ class ServiceView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['service_list'] = Service.objects.all()
+        context.update(quote_calculator_context())
         return context
 
 
@@ -159,3 +181,105 @@ class ContactView(View):
         ):
             next_url = "website:home"
         return redirect(next_url)
+
+
+class QuoteView(View):
+    """Render the quote calculator page and handle its enquiry submission."""
+
+    success_message = "Thanks — we've got it. We'll call you at your preferred slot to confirm scope."
+    error_message = "Please check the highlighted fields and try again."
+    throttled_message = "You've sent several enquiries already. Please try again later."
+
+    def get(self, request):
+        initial = {"source": "quote"}
+        preselect = None
+        slug = request.GET.get("service")
+        if slug:
+            service = Service.objects.filter(slug=slug).first()
+            if service:
+                initial["service"] = service.pk
+                preselect = service.slug
+        form = EnquiryForm(initial=initial)
+        context = self.build_context(form)
+        context["preselect"] = preselect
+        context["preselect_size"] = request.GET.get("size") or None
+        context["preselect_addons"] = request.GET.get("addons") or None
+        context["slots"] = pricing.upcoming_slots()
+        return render(request, "quote.html", context)
+
+    def post(self, request):
+        form = EnquiryForm(request.POST)
+        if not form.is_valid():
+            if self.is_ajax(request):
+                return JsonResponse(
+                    {"ok": False, "message": self.error_message, "errors": form.errors},
+                    status=400,
+                )
+            context = self.build_context(form)
+            context["slots"] = pricing.upcoming_slots()
+            return render(request, "quote.html", context, status=400)
+
+        ip = request.META.get("REMOTE_ADDR")
+        if self.is_throttled(ip):
+            if self.is_ajax(request):
+                return JsonResponse({"ok": False, "message": self.throttled_message}, status=429)
+            context = self.build_context(EnquiryForm())
+            context["slots"] = pricing.upcoming_slots()
+            return render(request, "quote.html", context, status=429)
+
+        enquiry = form.save(commit=False)
+        if enquiry.scope_kind:
+            enquiry.service = Service.objects.filter(slug=enquiry.scope_kind).first()
+        enquiry.save()
+
+        try:
+            self.send_notification(enquiry)
+        except Exception:
+            logger.exception("Could not send quote notification email for enquiry %s", enquiry.pk)
+
+        if self.is_ajax(request):
+            return JsonResponse({"ok": True, "message": self.success_message})
+
+        context = self.build_context(EnquiryForm())
+        context["slots"] = pricing.upcoming_slots()
+        context["confirmed"] = True
+        return render(request, "quote.html", context)
+
+    def build_context(self, form):
+        context = quote_calculator_context()
+        context["form"] = form
+        return context
+
+    def is_throttled(self, ip):
+        key = f"quote-form:{ip}"
+        count = cache.get(key, 0)
+        if count >= settings.CONTACT_RATE_LIMIT:
+            return True
+        cache.set(key, count + 1, 60 * 60)
+        return False
+
+    def is_ajax(self, request):
+        return request.headers.get("x-requested-with") == "XMLHttpRequest"
+
+    def send_notification(self, enquiry):
+        lines = [
+            "New enquiry from the quote flow",
+            "",
+            f"Name: {enquiry.name}",
+            f"Business: {enquiry.business}",
+            f"Email: {enquiry.email}",
+            f"Phone: {enquiry.phone}",
+            f"Service: {enquiry.service or enquiry.scope_kind}",
+            f"Scope: {enquiry.scope_size} {enquiry.addons}".strip(),
+            f"Estimate: {enquiry.estimate}",
+            f"Preferred slot: {enquiry.preferred_slot}",
+            "",
+            enquiry.message,
+        ]
+        EmailMessage(
+            subject=f"Website quote enquiry from {enquiry.name or enquiry.email}",
+            body="\n".join(lines),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.CONTACT_EMAIL],
+            reply_to=[enquiry.email] if enquiry.email else None,
+        ).send()

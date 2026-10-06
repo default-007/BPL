@@ -1,260 +1,163 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}BakPage Labs — Technology partner for growing businesses{% endblock %}
+
+{% block hero_scene_script %}
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="{% static 'assets/js/hero-scene.js' %}"></script>
+{% endblock %}
+
 {% block content %}
+<section class="bp-hero" data-bp-hero-scene>
+  <div class="bp-hero__bg" style="background-image: url('{% static 'assets/images/hero_02.jpg' %}');"></div>
+  <div class="bp-hero__scrim"></div>
+  <canvas class="bp-hero__scene" data-bp-scene-canvas aria-hidden="true"></canvas>
+  <div class="bp-container bp-hero__inner">
+    <span class="bp-label bp-label--red">Technology partner for growing businesses</span>
+    <h1 class="bp-h1">We build the software your business runs on.</h1>
+    <div class="bp-hero__actions">
+      <a href="#services" class="bp-btn bp-btn--primary">See what we build</a>
+      <a href="{% url 'website:quote' %}" class="bp-btn bp-btn--ghost">Get a quote</a>
+    </div>
+  </div>
+  <div class="bp-container">
+    <div class="bp-stats">
+      <div>
+        <div class="bp-num">2021</div>
+        <div class="bp-label">Founded</div>
+      </div>
+      {# TODO: replace with real figures once available #}
+      <div>
+        <div class="bp-num"><span data-bp-count="30">30</span>+</div>
+        <div class="bp-label">Projects shipped</div>
+      </div>
+      <div>
+        <div class="bp-num"><span data-bp-count="20">20</span>+</div>
+        <div class="bp-label">Clients served</div>
+      </div>
+      <div>
+        <div class="bp-num"><span data-bp-count="6">6</span></div>
+        <div class="bp-label">Core services</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<body class="home front-page">
+<section class="bp-section bp-container">
+  <div class="bp-grid bp-grid--3">
+    <div class="bp-feature">
+      <div class="bp-feature-icon bp-feature-icon--red"></div>
+      <h3>AI-first approach</h3>
+      <p>We integrate AI into real business workflows — not as a gimmick, but as infrastructure that saves time and money.</p>
+    </div>
+    <div class="bp-feature">
+      <div class="bp-feature-icon bp-feature-icon--red"></div>
+      <h3>Ship fast, iterate</h3>
+      <p>Working software every two weeks. No six-month vanishing acts — you see progress, give feedback, and stay in control.</p>
+    </div>
+    <div class="bp-feature">
+      <div class="bp-feature-icon bp-feature-icon--red"></div>
+      <h3>Built for East Africa</h3>
+      <p>M-Pesa integration, offline-capable systems, and interfaces designed for real network conditions and real users.</p>
+    </div>
+  </div>
+</section>
 
-  {% include 'partials/loader.html'%}
-
-  {% include 'partials/mobile_nav.html'%}
-  <!-- Mobile Nav End -->
-
-  <div class="pr__wrapper" id="site-wrapper">
-
-    <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_02.jpg' %}');"
-      id="site-hero">
-
-      {% include 'partials/header.html' %}
-      <!-- Site Header End -->
-
-      <section class="pr__hero uk-section" id="pr__hero">
-        <div class="uk-container">
-          <div class="section-inner">
-            <div class="hero-content uk-grid" data-uk-grid="">
-              <div class="uk-width-2-3@s">
-                <div class="brand">
-                  <h3 class="subtitle pr__heading__secondary">Technology Partner for Growing Businesses</h3>
-                </div>
-                <hr class="line pr__hr__primary">
-                <h2 class="title uk-heading-hero">We build the software your business runs on</h2>
-                <a class="button uk-button uk-button-large uk-button-default uk-margin-top" href="#pr__services"
-                  data-uk-scroll="">See What We Build</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section><!-- Site Hero End -->
-
-      <section class="pr__features uk-section uk-padding-remove-bottom" id="pr_features">
-        <div class="uk-container">
-          <div class="section-inner">
-            <div class="items-listing features-boxes uk-grid uk-grid-match uk-grid-medium uk-child-width-1-3@m"
-              data-uk-grid="">
-              <div class="item feature-box uk-active">
-                <div class="inner">
-                  <i class="icon pr-chart-bars pr__icon__large"></i>
-                  <h3 class="title uk-h4">AI-First Approach.</h3>
-                  <hr class="line pr__hr__secondary">
-                  <p class="description">We integrate AI into real business workflows — not as a gimmick, but as infrastructure that saves time and money.</p>
-                  <a href="#" class="link uk-position-cover"></a>
-                </div>
-              </div>
-              <div class="item feature-box">
-                <div class="inner">
-                  <i class="icon pr-rocket pr__icon__large"></i>
-                  <h3 class="title uk-h4">Ship Fast, Iterate.</h3>
-                  <hr class="line pr__hr__secondary">
-                  <p class="description">Working software every two weeks. No six-month vanishing acts — you see progress, give feedback, and stay in control.</p>
-                  <a href="#" class="link uk-position-cover"></a>
-                </div>
-              </div>
-              <div class="item feature-box">
-                <div class="inner">
-                  <i class="icon pr-pie-chart pr__icon__large"></i>
-                  <h3 class="title uk-h4">Built for East Africa.</h3>
-                  <hr class="line pr__hr__secondary">
-                  <p class="description">M-Pesa integration, offline-capable systems, and interfaces designed for real network conditions and real users.</p>
-                  <a href="#" class="link uk-position-cover"></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section><!-- Section: Features End -->
-
-    </div><!-- Hero Wrap End -->
-
-    <div class="pr__content" id="site-content">
-      <section class="pr__services pr__section pr__dark uk-section uk-section-large" id="pr__services">
-        <div class="section-outer">
-          <div class="section-heading">
-            <div class="uk-container">
-              <div class="inner">
-                <div class="left">
-                  <hr class="line pr__hr__secondary">
-                  <h2 class="title uk-h1">What We Build.</h2>
-                  <span class="subtitle pr__heading__secondary">AI-era technology for businesses that want to move fast</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="section-inner">
-            <div class="uk-container">
-              {% if services %}
-              <div
-                class="items-listing services-boxes uk-grid uk-grid-match uk-grid-medium uk-child-width-1-3@m uk-child-width-1-2@s"
-                data-uk-grid="">
-                {% for service in services %}
-                <div class="item service-box style-two">
-                  <div class="inner">
-                    <i class="overlay-icon icon {{service.icons}}"></i>
-                    <div class="content">
-                      <h5 class="title uk-h5">{{service.name}}</h5>
-                      {% if service.tagline %}
-                      <p class="description">{{service.tagline}}</p>
-                      {% else %}
-                      <p class="description">{{service.description|truncatechars:120}}</p>
-                      {% endif %}
-                      <i class="more icon pr-arrow-right"></i>
-                    </div>
-                    <a href="{{ service.get_absolute_url }}" class="link uk-position-cover"></a>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </section><!-- Section: Services End -->
-
-      <hr class="pr__vr__section">
-      <section class="pr__works pr__section pr__dark section-slider uk-section uk-section-large" id="pr__works">
-        <div class="section-outer">
-          <div class="section-heading">
-            <div class="uk-container">
-              <div class="inner">
-                <div class="left">
-                  <hr class="line pr__hr__secondary">
-                  <h2 class="title uk-h1">Projects.</h2>
-                  <span class="subtitle pr__heading__secondary">Things we've made</span>
-                </div>
-                <div class="right">
-                  <a class="button uk-button uk-button-default" href="{% url 'website:project' %}">View all</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% if projects %}
-          <div class="section-inner">
-            <div class="uk-container uk-container-no">
-              <div class="items-listing works-boxes works-slider owl-carousel" data-items="4" data-margin="30"
-                data-loop="true" data-center="true" data-autoplay="true" data-dots="true">
-                {% for project in projects %}
-                <div class="item work-box">
-                  <div class="outer">
-                    <div class="image pr__image__cover pr__ratio__square" data-src="{{project.image.url}}"
-                      data-uk-img=""></div>
-                    <div class="inner">
-                      <h3 class="title uk-h4">{{project.name}}</h3>
-                      {% for tag in project.tags.all %}
-                      <p class="category">{{tag.name}}</p>
-                      {% endfor %}
-
-                      <a href="{{project.get_absolute_url}}" class="link uk-position-cover"></a>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
+<section class="bp-section bp-container" id="services">
+  <div class="bp-heading-row">
+    <div>
+      <span class="bp-rule"></span>
+      <h2 class="bp-h2">What we build.</h2>
+    </div>
+    <a href="{% url 'website:service' %}" class="bp-link">All services</a>
+  </div>
+  {% if services %}
+  <div class="bp-grid bp-grid--3">
+    {% for service in services %}
+    <a href="{{ service.get_absolute_url }}" class="bp-offset">
+      <div class="bp-offset__inner bp-service-card">
+        <div class="bp-service-card__top">
+          <span class="bp-service-card__num">{{ forloop.counter|stringformat:"02d" }}</span>
+          {% if service.price_from %}
+          <span class="bp-service-card__price">From KES {{ service.price_from }}k</span>
           {% endif %}
         </div>
-      </section>
-      <hr class="pr__vr__section">
-      <section class="pr__clients pr__section pr__dark uk-section uk-section-large" id="pr__clients">
-        <div class="uk-container">
-          <div class="section-outer">
-            <div class="uk-flex uk-flex-middle uk-grid uk-grid-large" data-uk-grid="">
-              <div class="right uk-width-expand">
-                <div class="section-heading">
-                  <div class="inner">
-                    <div class="left">
-                      <hr class="line pr__hr__secondary">
-                      <h2 class="title uk-h1">What We Say.</h2>
-                      <span class="subtitle pr__heading__secondary">From the the big guy.</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="section-inner">
-                  <div class="item client-box style-one">
-                    <div class="outer">
-                      <div class="inner">
-                        <p class="description">We are motivated by the satisfaction of our
-                          clients. Put your trust in us and let us share
-                          in your growth. BakPage is made up of a team of expert,
-                          committed and experienced people with a passion for
-                          digital markets. Our goal is to achieve continuous and sustainable
-                          growth of our clients.</p>
-                        <p class="client">Brian Josh, Designer / Developer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="left uk-width-2-5@m uk-flex-first">
-                <div class="item client-box style-one client-image">
-                  <div class="image pr__image__cover pr__ratio__portrait"
-                    data-src="{% static 'assets/images/brian.jpg' %}" data-uk-img=""></div>
-                </div>
-              </div>
-            </div><!-- Grid End -->
-          </div><!-- Outer End -->
-        </div><!-- Container End -->
-      </section><!-- Section: Clients End -->
-      <hr class="pr__vr__section">
-      <section class="pr__blog pr__section pr__dark section-slider uk-section uk-section-large" id="pr__blog">
-        <div class="section-outer">
-          <div class="section-heading pr__center">
-            <div class="uk-container">
-              <div class="inner">
-                <div class="center">
-                  <h2 class="title uk-h1">Latest Blog.</h2>
-                  <span class="subtitle pr__heading__secondary">Check out some of our thinking</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="section-inner">
-            <div class="uk-container uk-container-no">
-              <div class="blog-listing style-one blog-slider owl-carousel" data-items="4" data-loop="true"
-                data-center="true" data-margin="30" data-autoplay="true" data-dots="true">
-                {% for blog in blogs%}
-                <article class="post type-post">
-                  <div class="outer">
-                    <div class="featured-image">
-                      <div class="image pr__image__cover" data-src="{{blog.image.url}}" data-uk-img=""></div>
-                    </div>
-                    <div class="inner">
-                      <a class="category" href="#">
-                        {% for tag in blog.tags.all %}
-                        <span><a href="#">{{ tag.name }}</a></span>
-                        {% endfor %}</a>
-                      <h3 class="title uk-h5"><a href="#">{{blog.title}}</a></h3>
-                      <a href="#" class="more icon pr-arrow-right"></a>
-                      <a href="#" class="link"></a>
-                    </div>
-                  </div>
-                </article>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <!--Inner End -->
+        <h3>{{ service.short_name|default:service.name }}</h3>
+        <p>{{ service.tagline|default:service.summary|default:service.description|truncatechars:120 }}</p>
+        <span class="bp-service-card__more">Learn more →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<section class="bp-section bp-container" id="work">
+  <div class="bp-heading-row">
+    <div>
+      <span class="bp-rule"></span>
+      <h2 class="bp-h2">Recent work.</h2>
+    </div>
+    <a href="{% url 'website:project' %}" class="bp-link">View all</a>
+  </div>
+  {% if projects %}
+  <div class="bp-grid bp-grid--3">
+    {% for project in projects|slice:":6" %}
+    <a href="{{ project.get_absolute_url }}" class="bp-tile">
+      <div class="bp-work-card__img" style="position: absolute; inset: 0; background-image: url('{{ project.image.url }}');"></div>
+      <div class="bp-work-card__scrim"></div>
+      <div class="bp-tile__body">
+        <div class="bp-work-card__tags">
+          {% for tag in project.tags.all %}<span class="bp-tag">{{ tag.name }}</span>{% endfor %}
         </div>
-        <!--Outer End -->
-      </section>
-      <!--Section: Blog End -->
+        <h3>{{ project.headline|default:project.name }}</h3>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
 
-      <hr class="pr__vr__section">
-    </div><!-- Site Content End -->
+<section class="bp-section bp-container">
+  <div class="bp-testimonial">
+    <div class="bp-testimonial__img" style="background-image: url('{% static 'assets/images/brian.jpg' %}');"></div>
+    <div class="bp-testimonial__body">
+      <p class="bp-testimonial__quote">"We are motivated by the satisfaction of our clients. Put your trust in us and let us share in your growth. BakPage is made up of a team of expert, committed and experienced people with a passion for digital markets. Our goal is to achieve continuous and sustainable growth of our clients."</p>
+      <p class="bp-label">Brian Josh — Designer / Developer</p>
+    </div>
+  </div>
+</section>
 
-    {% include 'partials/footer.html'%}
-    <!-- Site Footer End-->
+<section class="bp-section bp-container">
+  <div class="bp-heading-row">
+    <div>
+      <span class="bp-rule"></span>
+      <h2 class="bp-h2">Get a ballpark estimate.</h2>
+    </div>
+  </div>
+  {% include 'partials/quote-calculator.html' %}
+</section>
 
-  </div><!-- Site Wrapper End -->
-
-
-</body>
+{% if blogs %}
+<section class="bp-section bp-container">
+  <div class="bp-heading-row">
+    <div>
+      <span class="bp-rule"></span>
+      <h2 class="bp-h2">Latest thinking.</h2>
+    </div>
+    <a href="{% url 'website:blog' %}" class="bp-link">All posts</a>
+  </div>
+  <div class="bp-grid bp-grid--3">
+    {% for blog in blogs|slice:":3" %}
+    <a href="{{ blog.get_absolute_url }}" class="bp-studio-card">
+      <div class="bp-studio-card__img" style="background-image: url('{{ blog.image.url }}');"></div>
+      <div class="bp-studio-card__body">
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.text|truncatechars:120 }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 {% endblock %}

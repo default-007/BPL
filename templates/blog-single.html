@@ -1,163 +1,56 @@
 {% extends 'base.html' %}
-{% load static humanize%}
+{% load humanize %}
+{% block title %}{{ object.title }} — BakPage Labs{% endblock %}
 {% block content %}
-
-<body class="page-template page-template-full single single-post">
-    {% include 'partials/loader.html'%}
-
-    {% include 'partials/mobile_nav.html'%}
-    <!-- Mobile Nav End -->
-
-    <div class="pr__wrapper" id="site-wrapper">
-        <div class="pr__hero__wrap pr__dark" style="background-image: url('{% static 'assets/images/hero_03.jpg' %}');"
-            data-uk-parallax="bgy: -200" id="site-hero">
-            {% include 'partials/header.html' %}
-
-            <section class="pr__hero uk-section" id="pr__hero">
-                <div class="uk-container">
-                    <div class="section-inner">
-                        <div class="hero-content">
-                            <a class="category" href="{% url 'website:blog' %}">Blog</a>
-                            <h2 class="page-title uk-h1">{{object.title}}</h2>
-                        </div>
-                    </div>
-                </div>
-            </section><!-- Site Hero End -->
-
-        </div><!-- Hero Wrap End -->
-
-        <div class="pr__content" id="site-content">
-
-            <div class="pr__primary uk-section uk-section-medium" id="site-primary">
-                <div class="outer">
-                    <div class="uk-container uk-position-relative">
-                        <div class="inner uk-grid uk-grid-large uk-grid-match" data-uk-grid="">
-                            <div class="uk-width-expand">
-                                <main class="pr__main" id="site-main">
-                                    <article class="uk-article post type-post single-post">
-
-                                        <div class="outer uk-grid uk-grid-large uk-flex" data-uk-grid="">
-                                            <div class="inner uk-width-expand">
-                                                <div class="entry-body">
-                                                    <p class="uk-text-lead">Bring to the table win-win survival
-                                                        strategies to ensure proactive domination. At the end of the
-                                                        day, going forward,
-                                                    </p>
-
-                                                    <h3 class="uk-h3">{{object.title}}</h3>
-
-                                                    <figure class="wp-caption aligncenter" data-uk-lightbox="">
-                                                        <a href="{{object.image.url}}">
-                                                            <img src="{{object.image.url}}"
-                                                                alt="Improving User Experience and Website Performance with Progressive JPEGs"></a>
-                                                        <figcaption class="wp-caption-text">Success is largely a matter
-                                                            of holding on after others have let go.</figcaption>
-                                                    </figure>
-                                                    <p>{{object.text|safe}}</p>
-                                                    <p>{{object.formatted_markdown|safe }}</p>
-                                                    <br>
-                                                    <blockquote class="uk-text-left">
-                                                        <p>{{object.quote}}</p>
-                                                        <footer><strong>{{object.author}}</strong> – CEO, Strategy
-                                                            Director
-                                                        </footer>
-                                                    </blockquote>
-
-                                                </div>
-                                            </div>
-                                            <div class="pr__entry__sidebar uk-width-1-5@l uk-flex-first@l">
-                                                <div class="pr__entry__meta pr__vr">
-                                                    <ul class="content uk-list uk-list-divider">
-                                                        <li class="author">
-                                                            <strong>Written by:</strong>
-                                                            <span>{{object.author}}</span>
-                                                        </li>
-                                                        <li class="date">
-                                                            <strong>Posted on:</strong>
-                                                            <span>{{object.created_at|naturaltime}}</span>
-                                                        </li>
-                                                        <li class="category">
-                                                            <strong>Tags:</strong>
-                                                            {% for tag in object.tags.all %}
-                                                            <span><a href="#">{{ tag.name }}</a></span>
-                                                            {% endfor %}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="pr__entry__share pr__small">
-                                                    <a href="#" data-uk-tooltip="Share on Twitter"><i
-                                                            class="icon pr-logo-twitter"></i></a>
-                                                    <a href="#" data-uk-tooltip="Share on Facebook"><i
-                                                            class="icon pr-logo-facebook"></i></a>
-                                                    <a href="#" data-uk-tooltip="Share on Xing"><i
-                                                            class="icon pr-logo-xing"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </article>
-                                </main>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <section class="pr__blog pr__section section-slider uk-section uk-section-large uk-section-default"
-                id="pr__blog">
-                <div class="section-outer">
-                    <div class="section-heading">
-                        <div class="uk-container">
-                            <div class="inner">
-                                <div>
-                                    <hr class="line pr__hr__secondary">
-                                    <h2 class="title uk-h3 pr__heading__secondary">Related Posts.</h2>
-                                </div>
-                            </div>
-                        </div><!-- Container End -->
-                    </div><!-- Heading End -->
-                    <div class="section-inner">
-                        <div class="uk-container">
-                            <div class="blog-listing style-two blog-slider uk-grid uk-grid-collapse uk-child-width-1-3@m"
-                                data-uk-grid="">
-                                {% for object in blog_list%}
-                                <div class="item">
-                                    <article class="post type-post active">
-                                        <div class="outer">
-                                            <div class="featured-image">
-                                                <div class="image pr__image__cover" data-src="{{object.image.url}}"
-                                                    data-uk-img=""></div>
-                                            </div>
-                                            <div class="inner">
-                                                <div class="top">
-                                                    <a class="category" href="#">Careers</a>
-                                                    <h3 class="title uk-h4"><a href="#">{{object.title}}</a></h3>
-                                                    <p class="description">{{object.text|truncatechars:180}}</p>
-                                                    <a href="#" class="link"></a>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="meta">
-                                                        <li class="meta-date">{{object.created_at|naturaltime}}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                {%endfor%}
-
-                            </div>
-                        </div><!-- Container End -->
-                    </div><!-- Inner End -->
-                </div><!-- Outer End -->
-            </section><!-- Section: Blog End -->
-
-        </div><!-- Site Content End -->
-        {% include 'partials/footer.html'%}
-        <!-- Site Footer End-->
-
-    </div><!-- Site Wrapper End -->
-
-
-</body>
+<section class="bp-hero bp-hero--page">
+  <div class="bp-hero__scrim bp-hero__scrim--down"></div>
+  <div class="bp-container bp-hero__inner bp-hero__inner--short">
+    <span class="bp-label bp-label--red">Blog</span>
+    <h1 class="bp-h1">{{ object.title }}</h1>
+    <div class="bp-post-meta">
+      <span class="bp-muted">{{ object.author }}</span>
+      <span class="bp-muted">·</span>
+      <span class="bp-muted">{{ object.created_at|naturaltime }}</span>
+    </div>
+  </div>
+</section>
+<section class="bp-section bp-container bp-post-layout">
+  <article class="bp-prose">
+    {% if object.image %}
+    <div class="bp-offset--media" style="margin-bottom: 32px;">
+      <div class="bp-offset__inner"><img src="{{ object.image.url }}" alt="{{ object.title }}"></div>
+    </div>
+    {% endif %}
+    {{ object.formatted_markdown|safe }}
+    {% if object.quote %}
+    <blockquote>
+      <p>{{ object.quote }}</p>
+      <footer>— {{ object.author }}</footer>
+    </blockquote>
+    {% endif %}
+  </article>
+  <aside>
+    <div class="bp-panel">
+      <span class="bp-label">Tags</span>
+      <div class="bp-chip-row" style="margin-top: 14px;">
+        {% for tag in object.tags.all %}<span class="bp-tag">{{ tag.name }}</span>{% endfor %}
+      </div>
+    </div>
+  </aside>
+</section>
+{% if blog_list %}
+<section class="bp-section bp-container">
+  <div class="bp-heading-row"><div><span class="bp-rule"></span><h2 class="bp-h2">More posts.</h2></div></div>
+  <div class="bp-grid bp-grid--3">
+    {% for post in blog_list|slice:":3" %}
+    {% if post.slug != object.slug %}
+    <a href="{{ post.get_absolute_url }}" class="bp-studio-card">
+      <div class="bp-post-card__img" style="background-image: url('{{ post.image.url }}');"></div>
+      <div class="bp-studio-card__body"><h3>{{ post.title }}</h3></div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 {% endblock %}
